@@ -1,18 +1,18 @@
 <script lang="ts">
     import ProductCard from '$lib/ProductCard.svelte';
-    import { onMount } from "svelte";
-    import { derived, writable } from "svelte/store";
+    import { onMount } from 'svelte';
+    import { derived, writable } from 'svelte/store';
     const result = writable([]);
-    let products: any[] = []; 
+    let products: any[] = [];
 
     onMount(async () => {
         try {
             const response = await fetch('http://localhost:3000/products');
             if (response.ok) {
                 const data = await response.json();
-                result.set(data); 
+                result.set(data);
                 products = $result;
-                console.log(products)
+                console.log(products);
             } else {
                 console.log('Fehler beim Abrufen der Daten');
             }
@@ -24,7 +24,7 @@
 
 <html lang="de">
     <header>
-        <a href="./home" class="menueMittig">home</a>
+        <a href="/home" class="menueMittig">home</a>
         <a href="" class="menueMittig">cart</a>
         <a href="" class="menueMittig">settings</a>
         <span id="rechtsPositionieren">
@@ -36,10 +36,14 @@
     <body>
         <div id="divProducts">
             {#each products as product}
-                <ProductCard name={product.name} price={product.price} rating="4 out of 5 stars" image="/images/Rectangle5.png" />
+                <ProductCard
+                    name={product.name}
+                    price={product.price}
+                    rating="4 out of 5 stars"
+                    image={product.images[0] ?? 'https://picsum.photos/id/26/200/?blur=10'}
+                />
             {/each}
         </div>
-        
     </body>
 
     <footer />
@@ -51,9 +55,10 @@
         font-family: Arial, Helvetica, sans-serif;
     }
 
-    #divProducts{
+    #divProducts {
         display: flex;
         flex-wrap: wrap;
+        gap: 10px;
     }
 
     header {

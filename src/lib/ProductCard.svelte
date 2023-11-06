@@ -1,50 +1,40 @@
 <script lang="ts">
-    export let name = 'World';
-    export let price = '0,00€';
-    export let rating = '4 out of 5 stars';
-    export let image = '/images/Rectangle5.png';
+    export let name = '';
+    export let price = '';
+    export let rating = '';
+    export let image = '';
 </script>
 
-<div class="kachel">
-    <img src={image} alt="produktbild" class="produktbild" />
-    <div class="nameProdukt">{name}</div>
-    <div class="preisProdukt">{price}</div>
-    <div class="bewertungProdukt">{rating}</div>
+<div class="card">
+    <img src={image} alt="produktbild" />
+    <div class="header">
+        <div class="name">{name}</div>
+        <div class="preis">{price} €</div>
+    </div>
+    <div class="footer">{rating}</div>
 </div>
 
 <style>
-    .kachel {
+    .card {
         background-color: #d9d9d9;
-        width: 350px;
-        height: 370px;
-        text-align: center;
-        margin: 10px;
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
     }
 
-    .produktbild {
+    .card img {
+        aspect-ratio: 1 / 1;
+    }
+
+    .header {
         padding: 10px;
-        background-color: #d9d9d9;
+        display: flex;
+        justify-content: space-between;
     }
 
-    img {
-        width: 300px;
-    }
-
-    .nameProdukt {
-        float: left;
-        padding-left: 20px;
-        padding-top: 10px;
-        background-color: #d9d9d9;
-    }
-    .preisProdukt {
-        float: right;
-        padding-right: 20px;
-        padding-top: 10px;
-        background-color: #d9d9d9;
-    }
-
-    .bewertungProdukt {
-        margin-top: 50px;
-        background-color: #d9d9d9;
+    .footer {
+        padding: 10px;
+        text-align: center;
     }
 </style>
