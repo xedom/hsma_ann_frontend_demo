@@ -37,6 +37,7 @@
         <div id="divProducts">
             {#each products as product}
                 <ProductCard
+                    id={product._id}
                     name={product.name}
                     price={product.price}
                     rating="4 out of 5 stars"

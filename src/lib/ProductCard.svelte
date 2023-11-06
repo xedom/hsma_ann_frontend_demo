@@ -1,18 +1,19 @@
 <script lang="ts">
+    export let id = '';
     export let name = '';
     export let price = '';
     export let rating = '';
     export let image = '';
 </script>
 
-<div class="card">
-    <img src={image} alt="produktbild" />
+<a class="card" href="/product?id={id}">
+    <img src={image} alt="produktbild" draggable={false} />
     <div class="header">
         <div class="name">{name}</div>
         <div class="preis">{price} €</div>
     </div>
     <div class="footer">{rating}</div>
-</div>
+</a>
 
 <style>
     .card {
@@ -21,10 +22,16 @@
         overflow: hidden;
         display: flex;
         flex-direction: column;
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
     }
 
     .card img {
-        aspect-ratio: 1 / 1;
+        max-width: 200px;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        user-select: none;
     }
 
     .header {
