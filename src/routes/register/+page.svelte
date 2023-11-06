@@ -89,10 +89,10 @@
         const res = await fetch('http://localhost:3000/auth/register', {
             method: 'POST',
             headers: {
-                'Content-Type':'application/json',
+               /* 'Content-Type':'application/json',
                 'Access-Control-Allow-Origin': 'cors',
                 'Access-Control-Allow-Headers': '*',
-                'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS'
+                'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS'*/
             },
                 body: JSON.stringify({
                     "username": username,
