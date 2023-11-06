@@ -1,5 +1,25 @@
 <script lang="ts">
     import ProductCard from '$lib/ProductCard.svelte';
+    import { onMount } from "svelte";
+    import { derived, writable } from "svelte/store";
+    const result = writable([]);
+    let products: any[] = []; 
+
+    onMount(async () => {
+        try {
+            const response = await fetch('http://localhost:3000/products');
+            if (response.ok) {
+                const data = await response.json();
+                result.set(data); 
+                products = $result;
+                console.log(products)
+            } else {
+                console.log('Fehler beim Abrufen der Daten');
+            }
+        } catch (error) {
+            console.log('Fehler beim Abrufen der Daten:', error);
+        }
+    });
 </script>
 
 <html lang="de">
@@ -14,8 +34,12 @@
     </header>
 
     <body>
-        <ProductCard name="Produkt 1" price="0,00€" rating="4 out of 5 stars" image="/images/Rectangle5.png" />
-        <ProductCard name="Produkt 2" price="0,00€" rating="4 out of 5 stars" image="/images/Rectangle5.png" />
+        <div id="divProducts">
+            {#each products as product}
+                <ProductCard name={product.name} price={product.price} rating="4 out of 5 stars" image="/images/Rectangle5.png" />
+            {/each}
+        </div>
+        
     </body>
 
     <footer />
@@ -25,6 +49,11 @@
     * {
         background-color: #e5e5e5;
         font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #divProducts{
+        display: flex;
+        flex-wrap: wrap;
     }
 
     header {

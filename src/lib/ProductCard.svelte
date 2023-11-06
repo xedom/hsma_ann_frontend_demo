@@ -18,6 +18,7 @@
         width: 350px;
         height: 370px;
         text-align: center;
+        margin: 10px;
     }
 
     .produktbild {
