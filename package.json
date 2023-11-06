@@ -37,5 +37,9 @@
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"cors": "^2.8.5",
+		"mongodb": "^6.2.0"
+	}
 }

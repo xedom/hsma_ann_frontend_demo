@@ -76,6 +76,38 @@
     }
 </style>
 
+<script>
+    import { applyAction } from '$app/forms';
+
+    let username = ""
+    let email = ""
+    let password = ""
+    let result = null
+    
+
+    async function doPost() {
+        const res = await fetch('http://localhost:3000/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json',
+                'Access-Control-Allow-Origin': 'cors',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS'
+            },
+                body: JSON.stringify({
+                    "username": username,
+                    "email": email,
+                    "password": password
+                })
+            })
+            console.log(res)
+            const json = await res.json()
+            result = JSON.stringify(json)
+        }
+
+</script>
+
+
 <html lang = "de">
 <header>
     <a href="./home" class="menueMittig">home</a>
@@ -90,16 +122,16 @@
 
 <body>
     <div id="divRegister">
-        <form id="formularDateneingabe" action="bestellungsbestaetigung.html" method="post">
+        <form id="formularDateneingabe" >
             <div id="registerUeberschrift"> register </div> <br>
                     <label for="eingabeUsername">username: </label>
-                    <input id="eingabeUsername" type="text" name="username" /><br />
+                    <input id="eingabeUsername" type="text" name="username" bind:value={username} /><br />
                     <label for="eingabeEmail" >e-mail: </label>
-                    <input id="eingabeEmail" type="text" name="email" /><br />
+                    <input id="eingabeEmail" type="text" name="email" bind:value={email}/><br />
                     <label for="eingabePassword">password: </label>
-                    <input id="eingabePassword" type="text" name="password" /><br />
+                    <input id="eingabePassword" type="text" name="password" bind:value={password}/><br />
                     <div id="divButtonRegister">
-                        <button type=submit id="buttonRegister">register</button>
+                        <button type="button" id="buttonRegister" on:click={doPost}>register</button>
                     </div>
         </form>
     </div>
