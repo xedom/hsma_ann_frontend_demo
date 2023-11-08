@@ -28,7 +28,7 @@
 
 <html lang="de">
 	<header>
-		<a href="/home" class="menueMittig">home</a>
+		<a href="/" class="menueMittig">home</a>
 		<a href="" class="menueMittig">cart</a>
 		<a href="" class="menueMittig">settings</a>
 		<span id="rechtsPositionieren">
