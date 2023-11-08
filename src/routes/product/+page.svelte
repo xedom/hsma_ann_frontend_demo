@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
+	import { env } from '$env/dynamic/public'
 
 	const productID = $page.url.searchParams.get('id');
 
@@ -13,7 +14,7 @@
 	};
 
 	onMount(async () => {
-		const response = await fetch('http://localhost:3000/products/' + productID);
+		const response = await fetch(`${env.PUBLIC_API_URL}/products/` + productID);
 		const data = await response.json();
 		product = data;
 	});

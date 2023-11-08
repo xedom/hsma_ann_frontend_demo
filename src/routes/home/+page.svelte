@@ -2,12 +2,16 @@
 	import ProductCard from '$lib/ProductCard.svelte';
 	import { onMount } from 'svelte';
 	import { derived, writable } from 'svelte/store';
+	import { env } from '$env/dynamic/public'
+
+
 	const result = writable([]);
 	let products: any[] = [];
 
 	onMount(async () => {
 		try {
-			const response = await fetch('http://localhost:3000/products');
+			console.log(env.PUBLIC_API_URL)
+			const response = await fetch(`${env.PUBLIC_API_URL}/products`);
 			if (response.ok) {
 				const data = await response.json();
 				result.set(data);

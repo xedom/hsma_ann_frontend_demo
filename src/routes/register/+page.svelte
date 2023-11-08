@@ -78,6 +78,7 @@
 
 <script>
     import { applyAction } from '$app/forms';
+	import { env } from '$env/dynamic/public'
 
     let username = ""
     let email = ""
@@ -86,7 +87,7 @@
     
 
     async function doPost() {
-        const res = await fetch('http://localhost:3000/auth/register', {
+        const res = await fetch(`${env.PUBLIC_API_URL}/auth/register`, {
             method: 'POST',
             headers: {
                /* 'Content-Type':'application/json',
