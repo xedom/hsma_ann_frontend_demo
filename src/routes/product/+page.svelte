@@ -7,6 +7,12 @@
 
 	const productID = $page.url.searchParams.get('id');
 
+	let bigImage = '';
+	const changeBigImage = (image) => {
+	console.log(image);
+		bigImage = image;
+	};
+
 	let product = {
 		name: '',
 		description: '',
@@ -18,6 +24,7 @@
 	onMount(async () => {
 		const response = await fetch(`${env.PUBLIC_API_URL}/products/${productID}`);
 		const data = await response.json();
+		bigImage = data.images[0];
 		product = data;
 	});
 </script>
@@ -37,12 +44,14 @@
 		<div class="product">
 			<div class="left">
 				<img
-					src={product.images[0] ?? 'https://picsum.photos/id/26/200/?blur=10'}
+					src={bigImage ?? 'https://picsum.photos/id/26/200/?blur=10'}
 					alt="produktbild"
 				/>
 				<div class="previews">
 					{#each product.images as image}
-						<img src={image} alt="produktbild" />
+						<button on:click={() => changeBigImage(image)}>
+							<img src={image} alt="produktbild" />
+						</button>
 					{/each}
 				</div>
 			</div>
@@ -90,6 +99,15 @@
 		object-fit: cover;
 		user-select: none;
 		border-radius: 10px;
+	}
+
+	.product .left button {
+		border: none;
+		outline: none;
+		padding: 0;
+		margin: 0;
+		background-color: transparent;
+		cursor: pointer;
 	}
 
 	.product .left .previews {
