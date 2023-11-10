@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ProductCard from '$lib/ProductCard.svelte';
+	import ProductCard from '$lib/components/ProductCard.svelte';
 	import { onMount } from 'svelte';
 	import { derived, writable } from 'svelte/store';
 	import { env } from '$env/dynamic/public'
@@ -44,7 +44,7 @@
 					id={product._id}
 					name={product.name}
 					price={product.price}
-					rating="4 out of 5 stars"
+					rating={product.rating}
 					image={product.images[0] ?? 'https://picsum.photos/id/26/200/?blur=10'}
 				/>
 			{/each}

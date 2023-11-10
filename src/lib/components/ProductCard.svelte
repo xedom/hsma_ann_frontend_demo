@@ -1,18 +1,25 @@
 <script lang="ts">
+	import { parseMoney } from "$lib/utils/parser";
+
     export let id = '';
     export let name = '';
-    export let price = '';
-    export let rating = '';
+    export let price: number = 0;
+    export let rating: number = 0;
     export let image = '';
 </script>
 
 <a class="card" href="/product?id={id}">
     <img src={image} alt="produktbild" draggable={false} />
-    <div class="header">
-        <div class="name">{name}</div>
-        <div class="preis">{price} €</div>
+    <div class="body">
+        <div class="title">{name}</div>
+        <div class="rating">
+            {#each Array.from({ length: 5 }, (_, i) => i) as i}
+                <span class="star" style="color: {i < rating ? 'orange' : 'gray'}">★</span>
+            {/each}
+            {rating}
+        </div>
+        <div class="preis">{parseMoney(price)}</div>
     </div>
-    <div class="footer">{rating}</div>
 </a>
 
 <style>
@@ -34,14 +41,16 @@
         user-select: none;
     }
 
-    .header {
+    .card .body {
         padding: 10px;
         display: flex;
-        justify-content: space-between;
-    }
-
-    .footer {
-        padding: 10px;
+        flex-direction: column;
+        gap: 10px;
         text-align: center;
     }
+
+    .card .body .title {
+        font-weight: bold;
+    }
+
 </style>

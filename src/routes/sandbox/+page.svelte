@@ -1,5 +1,5 @@
 <script>
-	import InputUpload from '$lib/InputUpload.svelte';
+	import InputUpload from '$lib/components/InputUpload.svelte';
 </script>
 
 <InputUpload />
