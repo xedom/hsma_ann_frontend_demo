@@ -34,11 +34,18 @@
 	</header>
 
 	<div class="container">
-		<div class="left">
-			<img
-				src={product.images[0] ?? 'https://picsum.photos/id/26/200/?blur=10'}
-				alt="produktbild"
-			/>
+		<div class="product">
+			<div class="left">
+				<img
+					src={product.images[0] ?? 'https://picsum.photos/id/26/200/?blur=10'}
+					alt="produktbild"
+				/>
+				<div class="previews">
+					{#each product.images as image}
+						<img src={image} alt="produktbild" />
+					{/each}
+				</div>
+			</div>
 			<div class="right">
 				<h1 class="title">{product.name.toUpperCase()}</h1>
 				<div class="price"><b>Price:</b> {parseMoney(product.price)}</div>
@@ -57,22 +64,42 @@
 		justify-content: center;
 	}
 
-	.left {
+	.product {
 		display: flex;
 		padding: 10px;
 		width: 100%;
 		max-width: 900px;
 	}
 
-	.left .right {
+	.product .right {
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
 		padding-left: 20px;
 	}
 
-	.left img {
+	.product .left {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.product .left img {
 		height: 500px;
+		aspect-ratio: 1/1;
+		object-fit: cover;
+		user-select: none;
+		border-radius: 10px;
+	}
+
+	.product .left .previews {
+		display: flex;
+		gap: 10px;
+		flex-wrap: wrap;
+	}
+
+	.product .left .previews img {
+		height: 100px;
 		aspect-ratio: 1/1;
 		object-fit: cover;
 		user-select: none;
