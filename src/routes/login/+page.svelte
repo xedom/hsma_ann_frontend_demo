@@ -1,10 +1,4 @@
 <style>
-    *{
-        background-color: #E5E5E5;
-        font-family: Arial, Helvetica, sans-serif;
-        
-    }
-
     header{
         background-color: #FFFFFF;
         padding: 15px;

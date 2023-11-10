@@ -55,11 +55,6 @@
 </html>
 
 <style>
-	* {
-		background-color: #e5e5e5;
-		font-family: Arial, Helvetica, sans-serif;
-	}
-
 	#divProducts {
 		display: flex;
 		flex-wrap: wrap;

@@ -2,19 +2,21 @@
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import { env } from '$env/dynamic/public'
+	import { parseMoney } from '$lib/utils/parser';
+	import Rating from '$lib/components/Rating.svelte';
 
 	const productID = $page.url.searchParams.get('id');
 
 	let product = {
-		name: 'product 1',
-		description: 'description',
-		price: '0,00€',
-		images: ['/images/Rectangle5.png'],
-		rating: '4 out of 5 stars'
+		name: '',
+		description: '',
+		price: 0,
+		images: [],
+		rating: 0,
 	};
 
 	onMount(async () => {
-		const response = await fetch(`${env.PUBLIC_API_URL}/products/` + productID);
+		const response = await fetch(`${env.PUBLIC_API_URL}/products/${productID}`);
 		const data = await response.json();
 		product = data;
 	});
@@ -23,24 +25,24 @@
 <html lang="de">
 	<header>
 		<a href="/" class="menueMittig">home</a>
-		<a href="" class="menueMittig">cart</a>
-		<a href="" class="menueMittig">settings</a>
+		<a href="/cart" class="menueMittig">cart</a>
+		<a href="/settings" class="menueMittig">settings</a>
 		<span id="rechtsPositionieren">
 			<a id="username" href="./profile">username</a>
-			<img src="/images/userProfilePicture.jpg" alt="User Profile Picture" class="userpicture" />
+			<img src="/images/userProfilePicture.jpg" alt="Product" class="userpicture" />
 		</span>
 	</header>
 
 	<div class="container">
-		<div class="product">
+		<div class="left">
 			<img
 				src={product.images[0] ?? 'https://picsum.photos/id/26/200/?blur=10'}
 				alt="produktbild"
 			/>
 			<div class="right">
-				<div class="name">{product.name}</div>
-				<div class="price"><b>Price:</b> {product.price} €</div>
-				<div class="rating"><b>Rating:</b> {product.rating}</div>
+				<h1 class="title">{product.name.toUpperCase()}</h1>
+				<div class="price"><b>Price:</b> {parseMoney(product.price)}</div>
+				<div class="rating"><b>Rating:</b> <Rating rating={product.rating} /></div>
 				<div class="description"><b>Description:</b> {product.description}</div>
 			</div>
 		</div>
@@ -55,28 +57,26 @@
 		justify-content: center;
 	}
 
-	.product {
+	.left {
 		display: flex;
 		padding: 10px;
 		width: 100%;
 		max-width: 900px;
 	}
 
-	.product .right {
+	.left .right {
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
 		padding-left: 20px;
 	}
 
-	.product img {
+	.left img {
 		height: 500px;
 		aspect-ratio: 1/1;
-	}
-
-	* {
-		background-color: #e5e5e5;
-		font-family: Arial, Helvetica, sans-serif;
+		object-fit: cover;
+		user-select: none;
+		border-radius: 10px;
 	}
 
 	header {

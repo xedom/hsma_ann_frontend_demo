@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { parseMoney } from "$lib/utils/parser";
+	import Rating from "$lib/components/Rating.svelte";
 
     export let id = '';
     export let name = '';
@@ -11,13 +12,8 @@
 <a class="card" href="/product?id={id}">
     <img src={image} alt="produktbild" draggable={false} />
     <div class="body">
-        <div class="title">{name}</div>
-        <div class="rating">
-            {#each Array.from({ length: 5 }, (_, i) => i) as i}
-                <span class="star" style="color: {i < rating ? 'orange' : 'gray'}">★</span>
-            {/each}
-            {rating}
-        </div>
+        <div class="title">{name.toUpperCase()}</div>
+        <Rating rating={rating} />
         <div class="preis">{parseMoney(price)}</div>
     </div>
 </a>
