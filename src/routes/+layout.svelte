@@ -1,5 +1,7 @@
 <script lang="ts">
-  import './globalstyle.css';
+	import Toast from '$lib/components/Toast.svelte';
+	import './globalstyle.css';
 </script>
 
+<Toast />
 <slot />

@@ -6,11 +6,36 @@
 	--font-mono: 'Fira Mono', monospace;
 }
 
+* {
+	box-sizing: border-box;
+}
+
 body {
 	font-family: 'Open Sans';
 	font-size: 16px;
 	line-height: 1.5;
 
-	
 	background-color: #e5e5e5;
+}
+
+input,
+button {
+	outline: none;
+	border: none;
+	padding: 0.5rem;
+	border-radius: 0.25rem;
+}
+
+button {
+	cursor: pointer;
+	background-color: #16bdb3;
+	color: #fff;
+	padding: 0.5rem 1rem;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+label {
+	font-weight: bold;
+	text-transform: uppercase;
 }

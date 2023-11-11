@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
-	import { env } from '$env/dynamic/public'
+	import { env } from '$env/dynamic/public';
 	import { parseMoney } from '$lib/utils/parser';
 	import Rating from '$lib/components/Rating.svelte';
 
@@ -9,7 +9,7 @@
 
 	let bigImage = '';
 	const changeBigImage = (image) => {
-	console.log(image);
+		console.log(image);
 		bigImage = image;
 	};
 
@@ -18,7 +18,7 @@
 		description: '',
 		price: 0,
 		images: [],
-		rating: 0,
+		rating: 0
 	};
 
 	onMount(async () => {
@@ -43,10 +43,7 @@
 	<div class="container">
 		<div class="product">
 			<div class="left">
-				<img
-					src={bigImage ?? 'https://picsum.photos/id/26/200/?blur=10'}
-					alt="produktbild"
-				/>
+				<img src={bigImage ?? 'https://picsum.photos/id/26/200/?blur=10'} alt="produktbild" />
 				<div class="previews">
 					{#each product.images as image}
 						<button on:click={() => changeBigImage(image)}>
@@ -107,7 +104,6 @@
 		padding: 0;
 		margin: 0;
 		background-color: transparent;
-		cursor: pointer;
 	}
 
 	.product .left .previews {
