@@ -16,12 +16,7 @@
 		{ name: 'cart', href: '/cart' },
 		{ name: 'settings', href: '/settings' },
 
-		{ name: 'login', href: '/login' },
-		{ name: 'register', href: '/register' },
-		{ name: 'logout', href: '/logout' },
-
 		{ name: 'product', href: '/product' },
-		{ name: 'reset-password', href: '/reset-password' },
 		{ name: 'sandbox', href: '/sandbox' }
 	];
 
@@ -36,14 +31,19 @@
 			<a href={link.href}>{link.name}</a>
 		{/each}
 	</div>
-	<a class="right" href="/profile">
-		<span id="username">{$user.username}</span>
-		<img
-			src={$user.profilePic || '/images/userProfilePicture.jpg'}
-			alt="User Profile"
-			class="userpicture"
-		/>
-	</a>
+	<div class="right">
+		<a href="/login">login</a>
+		<a href="/register">register</a>
+		<a href="/logout">logout</a>
+		<a id="username" href="/profile">
+			<span>{$user.username}</span>
+			<img
+				src={$user.profilePic || '/images/userProfilePicture.jpg'}
+				alt="User Profile"
+				class="userpicture"
+			/>
+		</a>
+	</div>
 </nav>
 
 <style>
@@ -91,5 +91,11 @@
 		height: 2.5rem;
 		border-radius: 50%;
 		object-fit: cover;
+	}
+
+	#username {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
 	}
 </style>

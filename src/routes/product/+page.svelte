@@ -8,7 +8,7 @@
 	const productID = $page.url.searchParams.get('id');
 
 	let bigImage = '';
-	const changeBigImage = (image) => {
+	const changeBigImage = (image: string) => {
 		console.log(image);
 		bigImage = image;
 	};
@@ -29,47 +29,26 @@
 	});
 </script>
 
-<html lang="de">
-	<header>
-		<a href="/" class="menueMittig">home</a>
-		<a href="/cart" class="menueMittig">cart</a>
-		<a href="/settings" class="menueMittig">settings</a>
-		<span id="rechtsPositionieren">
-			<a id="username" href="./profile">username</a>
-			<img src="/images/userProfilePicture.jpg" alt="Product" class="userpicture" />
-		</span>
-	</header>
-
-	<div class="container">
-		<div class="product">
-			<div class="left">
-				<img src={bigImage ?? 'https://picsum.photos/id/26/200/?blur=10'} alt="produktbild" />
-				<div class="previews">
-					{#each product.images as image}
-						<button on:click={() => changeBigImage(image)}>
-							<img src={image} alt="produktbild" />
-						</button>
-					{/each}
-				</div>
-			</div>
-			<div class="right">
-				<h1 class="title">{product.name.toUpperCase()}</h1>
-				<div class="price"><b>Price:</b> {parseMoney(product.price)}</div>
-				<div class="rating"><b>Rating:</b> <Rating rating={product.rating} /></div>
-				<div class="description"><b>Description:</b> {product.description}</div>
-			</div>
+<div class="product">
+	<div class="left">
+		<img src={bigImage ?? 'https://picsum.photos/id/26/200/?blur=10'} alt="produktbild" />
+		<div class="previews">
+			{#each product.images as image}
+				<button on:click={() => changeBigImage(image)}>
+					<img src={image} alt="produktbild" />
+				</button>
+			{/each}
 		</div>
 	</div>
-</html>
+	<div class="right">
+		<h1 class="title">{product.name.toUpperCase()}</h1>
+		<div class="price"><b>Price:</b> {parseMoney(product.price)}</div>
+		<div class="rating"><b>Rating:</b> <Rating rating={product.rating} /></div>
+		<div class="description"><b>Description:</b> {product.description}</div>
+	</div>
+</div>
 
 <style>
-	.container {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
-
 	.product {
 		display: flex;
 		padding: 10px;
@@ -118,42 +97,5 @@
 		object-fit: cover;
 		user-select: none;
 		border-radius: 10px;
-	}
-
-	header {
-		background-color: #ffffff;
-		padding: 20px;
-		padding-left: 200px;
-		text-align: center;
-		height: 40px;
-	}
-	a {
-		background-color: #ffffff;
-		text-decoration: none;
-		color: #000000;
-		font-size: 1.5em;
-	}
-	.menueMittig {
-		margin: 15px;
-		padding-left: 50px;
-	}
-
-	#rechtsPositionieren {
-		float: right;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background-color: #ffffff;
-	}
-
-	#username {
-		background-color: #ffffff;
-	}
-
-	.userpicture {
-		margin-left: 20px;
-		max-height: 40px;
-		max-width: 40px;
-		border-radius: 300px;
 	}
 </style>
