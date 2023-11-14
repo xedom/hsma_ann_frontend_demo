@@ -14,10 +14,7 @@
 	const links = [
 		{ name: 'home', href: '/' },
 		{ name: 'cart', href: '/cart' },
-		{ name: 'settings', href: '/settings' },
-
-		{ name: 'product', href: '/product' },
-		{ name: 'sandbox', href: '/sandbox' }
+		{ name: 'settings', href: '/settings' }
 	];
 
 	onMount(async () => {

@@ -26,7 +26,7 @@
 	}
 
 	main {
-		padding: 10px;
+		padding: 0 10px;
 		border-radius: 10px;
 		flex: 1;
 		overflow-y: auto;

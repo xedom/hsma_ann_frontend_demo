@@ -65,21 +65,21 @@
 <style>
 	.toast_container {
 		position: fixed;
-		top: 0;
+		top: 65px;
 		right: 0;
 		z-index: 9999;
 		display: flex;
 		flex-direction: column;
 		align-items: flex-end;
-		gap: 1rem;
-		padding: 1rem;
+		gap: 10px;
+		padding: 10px;
 	}
 
 	.toast {
 		border: none;
 		border-radius: 5px;
 		padding: 10px 20px;
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;

@@ -28,6 +28,8 @@
 	#divProducts {
 		display: flex;
 		flex-wrap: wrap;
+		justify-content: center;
+		padding: 0 200px;
 		gap: 10px;
 	}
 </style>

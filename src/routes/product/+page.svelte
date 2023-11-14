@@ -29,26 +29,36 @@
 	});
 </script>
 
-<div class="product">
-	<div class="left">
-		<img src={bigImage ?? 'https://picsum.photos/id/26/200/?blur=10'} alt="produktbild" />
-		<div class="previews">
-			{#each product.images as image}
-				<button on:click={() => changeBigImage(image)}>
-					<img src={image} alt="produktbild" />
-				</button>
-			{/each}
+<div class="container">
+	<div class="product">
+		<div class="left">
+			<img src={bigImage ?? 'https://picsum.photos/id/26/200/?blur=10'} alt="produktbild" />
+			<div class="previews">
+				{#each product.images as image}
+					<button on:click={() => changeBigImage(image)}>
+						<img src={image} alt="produktbild" />
+					</button>
+				{/each}
+			</div>
 		</div>
-	</div>
-	<div class="right">
-		<h1 class="title">{product.name.toUpperCase()}</h1>
-		<div class="price"><b>Price:</b> {parseMoney(product.price)}</div>
-		<div class="rating"><b>Rating:</b> <Rating rating={product.rating} /></div>
-		<div class="description"><b>Description:</b> {product.description}</div>
+		<div class="right">
+			<h1 class="title">{product.name.toUpperCase()}</h1>
+			<div class="price"><b>Price:</b> {parseMoney(product.price)}</div>
+			<div class="rating"><b>Rating:</b> <Rating rating={product.rating} /></div>
+			<div class="description"><b>Description:</b> {product.description}</div>
+		</div>
 	</div>
 </div>
 
 <style>
+	.container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+	}
+
 	.product {
 		display: flex;
 		padding: 10px;
@@ -70,7 +80,8 @@
 	}
 
 	.product .left img {
-		height: 500px;
+		width: 500px;
+
 		aspect-ratio: 1/1;
 		object-fit: cover;
 		user-select: none;
@@ -92,7 +103,7 @@
 	}
 
 	.product .left .previews img {
-		height: 100px;
+		width: 100px;
 		aspect-ratio: 1/1;
 		object-fit: cover;
 		user-select: none;
