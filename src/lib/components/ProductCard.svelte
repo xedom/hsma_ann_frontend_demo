@@ -28,11 +28,13 @@
 		cursor: pointer;
 		text-decoration: none;
 		color: inherit;
+		width: 200px;
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	}
 
 	.card img {
 		max-width: 200px;
+		max-height: 150px;
 		aspect-ratio: 1/1;
 		object-fit: cover;
 		user-select: none;
@@ -42,7 +44,6 @@
 		padding: 10px;
 		display: flex;
 		flex-direction: column;
-		gap: 10px;
 		text-align: center;
 	}
 
