@@ -14,7 +14,15 @@
 	const links = [
 		{ name: 'home', href: '/' },
 		{ name: 'cart', href: '/cart' },
-		{ name: 'settings', href: '/settings' }
+		{ name: 'settings', href: '/settings' },
+
+		{ name: 'login', href: '/login' },
+		{ name: 'register', href: '/register' },
+		{ name: 'logout', href: '/logout' },
+
+		{ name: 'product', href: '/product' },
+		{ name: 'reset-password', href: '/reset-password' },
+		{ name: 'sandbox', href: '/sandbox' }
 	];
 
 	onMount(async () => {
@@ -28,14 +36,14 @@
 			<a href={link.href}>{link.name}</a>
 		{/each}
 	</div>
-	<div class="right">
-		<a id="username" href="./profile">{$user.username}</a>
+	<a class="right" href="/profile">
+		<span id="username">{$user.username}</span>
 		<img
 			src={$user.profilePic || '/images/userProfilePicture.jpg'}
 			alt="User Profile"
 			class="userpicture"
 		/>
-	</div>
+	</a>
 </nav>
 
 <style>
