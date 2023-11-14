@@ -48,3 +48,8 @@ export const apiGetLoggedUser = async () => {
 	console.log('fetching apiGetLoggedUser');
 	return await api_get('/users/profile');
 };
+
+export const apiGetProducts = async () => {
+	console.log('fetching apiGetProducts');
+	return await api_get('/products');
+};
