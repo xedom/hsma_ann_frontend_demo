@@ -99,8 +99,13 @@
 		</div>
 
 		<div class="field">
-			<label for="password">new password</label>
+			<label for="password">password</label>
 			<input type="password" name="password" id="password" placeholder="password" />
+		</div>
+
+		<div class="field">
+			<label for="password">new password</label>
+			<input type="password" name="newPassword" id="password" placeholder="new password" />
 		</div>
 
 		<div class="field">
