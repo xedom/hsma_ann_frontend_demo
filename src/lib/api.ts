@@ -7,6 +7,8 @@ export const api_get = async (url: string) => {
 	url = env.PUBLIC_API_URL + url;
 	const response = await fetch(url, {
 		method: 'GET',
+		credentials: 'include',
+		mode: 'cors',
 		headers: {
 			contentType: 'application/json',
 			Authorization: `Bearer ${loggedUserToken}`

@@ -26,10 +26,11 @@
 
 <style>
 	#divProducts {
+		align-self: center;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
-		padding: 0 200px;
+		/* padding: 0 200px; */
 		gap: 10px;
 	}
 </style>
