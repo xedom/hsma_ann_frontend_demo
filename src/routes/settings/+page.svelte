@@ -100,7 +100,7 @@
 
 			<div class="field">
 				<label for="password">new password</label>
-				<input type="password" name="newPassword" id="password" placeholder="new password" />
+				<input type="password" name="newPassword" id="newPassword" placeholder="new password" />
 			</div>
 
 			<div class="field">

@@ -97,9 +97,11 @@
 	}
 
 	.product .left .previews {
+		width: 500px;
+		padding-bottom: 10px;
 		display: flex;
 		gap: 10px;
-		flex-wrap: wrap;
+		overflow-x: auto;
 	}
 
 	.product .left .previews img {
