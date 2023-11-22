@@ -14,7 +14,15 @@ export const api_get = async (url: string) => {
 			Authorization: `Bearer ${loggedUserToken}`
 		}
 	});
-	return await response.json();
+	const res = await response.json();
+	console.log(res);
+
+	if (response.status == 401) 
+		throw new Error('Unauthorized');
+	else if (response.status != 200) 
+		throw new Error('Something went wrong');
+
+	return res;
 };
 
 export const api_post = async (url: string, data: any) => {

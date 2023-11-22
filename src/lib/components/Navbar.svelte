@@ -4,12 +4,7 @@
 	import { onMount } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 
-	export const user: Writable<User> = writable({
-		username: '',
-		email: '',
-		profilePic: '',
-		role: ''
-	});
+	export const user: Writable<User | undefined> = writable();
 
 	const links = [
 		{ name: 'home', href: '/', public: true },
@@ -17,39 +12,39 @@
 		{ name: 'settings', href: '/settings', public: false }
 	];
 
-	const isUserLoggedIn = () => {
-		return $user.role !== '' && $user.role !== undefined;
-	};
+	$: isUserLoggedIn = $user !== undefined;
 
 	onMount(async () => {
-		user.set(await apiGetLoggedUser());
+		try {
+			user.set(await apiGetLoggedUser());
+		} catch (e) {
+			console.log(e);
+		}
 	});
 </script>
 
 <nav>
 	<div class="left">
 		{#each links as link}
-			{#if link.public || isUserLoggedIn()}
+			{#if link.public || isUserLoggedIn}
 				<a href={link.href}>{link.name}</a>
 			{/if}
 		{/each}
 	</div>
 	<div class="right">
-		{#if $user.role === 'admin'}
+		{#if isUserLoggedIn && $user?.role === 'admin'}
 			<a href="/admin">admin</a>
 		{/if}
 
-		[{$user.role}]
-
-		{#if !isUserLoggedIn()}
+		{#if !isUserLoggedIn}
 			<a href="/login">login</a>
 			<a href="/register">register</a>
 		{:else}
 			<a href="/logout">logout</a>
 			<a id="username" href="/profile">
-				<span>{$user.username}</span>
+				<span>{$user?.username}</span>
 				<img
-					src={$user.profilePic || '/images/userProfilePicture.jpg'}
+					src={$user?.profilePic || '/images/userProfilePicture.jpg'}
 					alt="User Profile"
 					class="userpicture"
 				/>
