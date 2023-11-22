@@ -6,6 +6,7 @@
 	import ProfilePic from '$lib/components/ProfilePic.svelte';
 	import { ToastStatus, addToast } from '$lib/components/Toast.svelte';
 	import { onMount } from 'svelte';
+	import { apiGetLoggedUser } from '$lib/api';
 
 	let picImage = '';
 	const formActionUrl = `${env.PUBLIC_API_URL}/users/settings`;
@@ -39,31 +40,23 @@
 	};
 
 	onMount(async () => {
-		const res = await fetch(`${env.PUBLIC_API_URL}/users/profile`, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJyb2xlIjoidXNlciIsInN1YiI6IjY1NGFiYWVmMmNhMTI0NmFjMzlmY2EyZCIsImlhdCI6MTY5OTY4MTk4MCwiZXhwIjoxNjk5NjkyNzgwfQ.As0GXz-g4vTxiTaghPOYdwxsPtRi6Ty2ET0FVUD12Zo`
+		try {
+			const data = await apiGetLoggedUser();
+			userInfo = {
+				username: data.username,
+				email: data.email,
+				address: `${data.address.street}, ${data.address.city}, ${data.address.state}, ${data.address.country}`
+			};
+		} catch (e) {
+			if (e instanceof Error) {
+				addToast({ description: e.message, status: ToastStatus.ERROR });
 			}
-		});
-
-		const data = await res.json();
-
-		if (res.status !== 200) {
-			addToast({ description: data.message, status: ToastStatus.ERROR });
-			return;
 		}
-
-		userInfo = {
-			username: data.username,
-			email: data.email,
-			address: `${data.address.street}, ${data.address.city}, ${data.address.state}, ${data.address.country}`
-		};
 	});
 </script>
 
 <div class="container">
-	<form use:enhance={resHandle} action={formActionUrl} method="POST" enctype="multipart/form-data">
+	<form action={formActionUrl} method="POST" enctype="multipart/form-data">
 		<div class="left">
 			<ProfilePic name="image" on:error={handlePicError} />
 			<!-- <h5>uploaded image preview:</h5>
