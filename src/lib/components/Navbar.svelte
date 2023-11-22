@@ -18,7 +18,7 @@
 	];
 
 	const isUserLoggedIn = () => {
-		return $user.role !== '' || $user.role !== undefined;
+		return $user.role !== '' && $user.role !== undefined;
 	};
 
 	onMount(async () => {
