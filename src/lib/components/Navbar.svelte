@@ -54,7 +54,7 @@
 			<a href="/register">register</a>
 		{:else}
 			<a href="/logout">logout</a>
-			<a id="username" href="/profile">
+			<a id="username" href={`/users/${$user?.username}`}>
 				<span>{$user?.username}</span>
 				<img
 					src={$user?.profilePic || '/images/userProfilePicture.jpg'}

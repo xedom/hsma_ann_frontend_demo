@@ -11,7 +11,6 @@
 
 	let bigImage = '';
 	const changeBigImage = (image: string) => {
-		console.log(image);
 		bigImage = image;
 	};
 
