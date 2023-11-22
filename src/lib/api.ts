@@ -15,7 +15,7 @@ export const api_get = async (url: string) => {
 		}
 	});
 	const res = await response.json();
-	console.log(res);
+	// console.log(res);
 
 	if (response.status == 401) 
 		throw new Error('Unauthorized');
@@ -67,4 +67,14 @@ export const apiGetProducts = async () => {
 export const apiGetProduct = async (id: string) => {
 	console.log('fetching apiGetProduct with id: ' + id);
 	return await api_get(`/products/${id}`);
+}
+
+export const apiGetUsers = async () => {
+	console.log('fetching apiGetUsers');
+	return await api_get('/users');
+}
+
+export const apiGetUser = async (username: string) => {
+	console.log('fetching apiGetUser with username: ' + username);
+	return await api_get(`/users/${username}`);
 }
