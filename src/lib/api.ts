@@ -63,3 +63,8 @@ export const apiGetProducts = async () => {
 	console.log('fetching apiGetProducts');
 	return await api_get('/products');
 };
+
+export const apiGetProduct = async (id: string) => {
+	console.log('fetching apiGetProduct with id: ' + id);
+	return await api_get(`/products/${id}`);
+}

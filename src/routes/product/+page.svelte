@@ -4,6 +4,8 @@
 	import { env } from '$env/dynamic/public';
 	import { parseMoney } from '$lib/utils/parser';
 	import Rating from '$lib/components/Rating.svelte';
+	import { apiGetProduct } from '$lib/api';
+	import { ToastStatus, addToast } from '$lib/components/Toast.svelte';
 
 	const productID = $page.url.searchParams.get('id');
 
@@ -22,10 +24,16 @@
 	};
 
 	onMount(async () => {
-		const response = await fetch(`${env.PUBLIC_API_URL}/products/${productID}`);
-		const data = await response.json();
-		bigImage = data.images[0];
-		product = data;
+		if (!productID) return;
+		try {
+			const data = await apiGetProduct(productID.toString());
+			bigImage = data.images[0];
+			product = data;
+		} catch (e) {
+			if (e instanceof Error) {
+				addToast({ description: e.message, status: ToastStatus.ERROR });
+			}
+		}
 	});
 </script>
 
