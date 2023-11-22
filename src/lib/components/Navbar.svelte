@@ -12,9 +12,9 @@
 	});
 
 	const links = [
-		{ name: 'home', href: '/' },
-		{ name: 'cart', href: '/cart' },
-		{ name: 'settings', href: '/settings' }
+		{ name: 'home', href: '/', public: true },
+		{ name: 'cart', href: '/cart', public: false },
+		{ name: 'settings', href: '/settings', public: false }
 	];
 
 	onMount(async () => {
@@ -25,21 +25,32 @@
 <nav>
 	<div class="left">
 		{#each links as link}
-			<a href={link.href}>{link.name}</a>
+			{#if link.public || $user.role !== ''}
+				<a href={link.href}>{link.name}</a>
+			{/if}
 		{/each}
 	</div>
 	<div class="right">
-		<a href="/login">login</a>
-		<a href="/register">register</a>
-		<a href="/logout">logout</a>
-		<a id="username" href="/profile">
-			<span>{$user.username}</span>
-			<img
-				src={$user.profilePic || '/images/userProfilePicture.jpg'}
-				alt="User Profile"
-				class="userpicture"
-			/>
-		</a>
+		{#if $user.role === 'admin'}
+			<a href="/admin">admin</a>
+		{/if}
+
+		[{$user.role}]
+
+		{#if $user.role === ''}
+			<a href="/login">login</a>
+			<a href="/register">register</a>
+		{:else}
+			<a href="/logout">logout</a>
+			<a id="username" href="/profile">
+				<span>{$user.username}</span>
+				<img
+					src={$user.profilePic || '/images/userProfilePicture.jpg'}
+					alt="User Profile"
+					class="userpicture"
+				/>
+			</a>
+		{/if}
 	</div>
 </nav>
 
