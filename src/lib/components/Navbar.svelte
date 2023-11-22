@@ -17,6 +17,10 @@
 		{ name: 'settings', href: '/settings', public: false }
 	];
 
+	const isUserLoggedIn = () => {
+		return $user.role !== '' || $user.role !== undefined;
+	};
+
 	onMount(async () => {
 		user.set(await apiGetLoggedUser());
 	});
@@ -25,7 +29,7 @@
 <nav>
 	<div class="left">
 		{#each links as link}
-			{#if link.public || $user.role !== ''}
+			{#if link.public || isUserLoggedIn()}
 				<a href={link.href}>{link.name}</a>
 			{/if}
 		{/each}
@@ -37,7 +41,7 @@
 
 		[{$user.role}]
 
-		{#if $user.role === ''}
+		{#if !isUserLoggedIn()}
 			<a href="/login">login</a>
 			<a href="/register">register</a>
 		{:else}
