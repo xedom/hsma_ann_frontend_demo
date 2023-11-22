@@ -4,8 +4,7 @@
 	import { onMount } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import { addToast, ToastStatus } from './Toast.svelte';
-
-	export const user: Writable<User | undefined> = writable();
+	import { user } from '$lib/stores/users';
 
 	const links = [
 		{ name: 'home', href: '/', public: true },
