@@ -3,6 +3,7 @@
 	import type { User } from '$lib/types';
 	import { onMount } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
+	import { addToast, ToastStatus } from './Toast.svelte';
 
 	export const user: Writable<User | undefined> = writable();
 
@@ -16,9 +17,22 @@
 
 	onMount(async () => {
 		try {
-			user.set(await apiGetLoggedUser());
+			const fetchedUser = await apiGetLoggedUser();
+			$user = { ...fetchedUser, profilePic: `data:image/jpeg;base64,${fetchedUser.profilePic}` };
 		} catch (e) {
-			console.log(e);
+			user.set(undefined);
+			if (!(e instanceof Error))
+				return addToast({
+					title: 'User error',
+					description: 'Generic error',
+					status: ToastStatus.ERROR
+				});
+
+			addToast({
+				title: 'User error',
+				description: e.message,
+				status: ToastStatus.ERROR
+			});
 		}
 	});
 </script>
