@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { apiGetLoggedUser } from '$lib/api';
-	import type { User } from '$lib/types';
 	import { onMount } from 'svelte';
-	import { writable, type Writable } from 'svelte/store';
 	import { addToast, ToastStatus } from './Toast.svelte';
 	import { user } from '$lib/stores/users';
 
 	const links = [
 		{ name: 'home', href: '/', public: true },
 		{ name: 'users', href: '/users', public: true },
+		{ name: 'create product', href: '/product/create', public: false },
+		{ name: 'orders', href: '/orders', public: false },
 		{ name: 'cart', href: '/cart', public: false },
 		{ name: 'settings', href: '/settings', public: false }
 	];
@@ -46,8 +46,9 @@
 		{/each}
 	</div>
 	<div class="right">
-		{#if isUserLoggedIn && $user?.role === 'admin'}
-			<a href="/admin">admin</a>
+		<!-- {#if isUserLoggedIn && $user?.role === 'admin'} -->
+		{#if isUserLoggedIn}
+		<a href="/admin">admin</a>
 		{/if}
 
 		{#if !isUserLoggedIn}

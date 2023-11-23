@@ -5,6 +5,10 @@
 	import './globalstyle.css';
 </script>
 
+<svelte:head>
+	<title>Shop</title>
+</svelte:head>
+
 <Toast />
 
 <header>
