@@ -7,7 +7,8 @@
 	import { apiGetProduct } from '$lib/api';
 	import { ToastStatus, addToast } from '$lib/components/Toast.svelte';
 
-	const productID = $page.url.searchParams.get('id');
+	const productID = $page.params.productID;
+	// const productID = $page.url.searchParams.get('id');
 
 	let bigImage = '';
 	const changeBigImage = (image: string) => {

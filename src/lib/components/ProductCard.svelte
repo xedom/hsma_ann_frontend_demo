@@ -9,7 +9,7 @@
 	export let image: string = '';
 </script>
 
-<a class="card" href="/product?id={id}">
+<a class="card" href="/products/{id}">
 	<img src={image} alt="produktbild" draggable={false} />
 	<div class="body">
 		<div class="title">{name.toUpperCase()}</div>

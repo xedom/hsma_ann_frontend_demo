@@ -7,7 +7,7 @@
 	const links = [
 		{ name: 'home', href: '/', public: true },
 		{ name: 'users', href: '/users', public: true },
-		{ name: 'create product', href: '/product/create', public: false },
+		{ name: 'create product', href: '/products/create', public: false },
 		{ name: 'orders', href: '/orders', public: false },
 		{ name: 'cart', href: '/cart', public: false },
 		{ name: 'settings', href: '/settings', public: false }
@@ -48,7 +48,7 @@
 	<div class="right">
 		<!-- {#if isUserLoggedIn && $user?.role === 'admin'} -->
 		{#if isUserLoggedIn}
-		<a href="/admin">admin</a>
+			<a href="/admin">admin</a>
 		{/if}
 
 		{#if !isUserLoggedIn}

@@ -55,70 +55,66 @@
 	});
 </script>
 
-<div class="container">
-	<form action={formActionUrl} method="POST" enctype="multipart/form-data">
-		<div class="left">
-			<ProfilePic name="image" on:error={handlePicError} />
-			<!-- <h5>uploaded image preview:</h5>
+<h1>Settings</h1>
+<form action={formActionUrl} method="POST" enctype="multipart/form-data">
+	<div class="left">
+		<ProfilePic name="image" on:error={handlePicError} />
+		<!-- <h5>uploaded image preview:</h5>
 			<img src={picImage} alt="" /> -->
+	</div>
+
+	<div class="right">
+		<div class="field">
+			<label for="username">username</label>
+			<input
+				type="text"
+				name="username"
+				id="username"
+				placeholder="username"
+				value={userInfo?.username ?? ''}
+			/>
 		</div>
 
-		<div class="right">
-			<div class="field">
-				<label for="username">username</label>
-				<input
-					type="text"
-					name="username"
-					id="username"
-					placeholder="username"
-					value={userInfo?.username ?? ''}
-				/>
-			</div>
-
-			<div class="field">
-				<label for="email">email</label>
-				<input
-					type="email"
-					name="email"
-					id="email"
-					placeholder="email"
-					value={userInfo?.email ?? ''}
-				/>
-			</div>
-
-			<div class="field">
-				<label for="password">password</label>
-				<input type="password" name="password" id="password" placeholder="password" />
-			</div>
-
-			<div class="field">
-				<label for="password">new password</label>
-				<input type="password" name="newPassword" id="newPassword" placeholder="new password" />
-			</div>
-
-			<div class="field">
-				<label for="address">address</label>
-				<input
-					type="text"
-					name="address"
-					id="address"
-					placeholder="address"
-					value={userInfo?.address ?? ''}
-				/>
-			</div>
-
-			<button type="submit">Save</button>
+		<div class="field">
+			<label for="email">email</label>
+			<input
+				type="email"
+				name="email"
+				id="email"
+				placeholder="email"
+				value={userInfo?.email ?? ''}
+			/>
 		</div>
-	</form>
-</div>
+
+		<div class="field">
+			<label for="password">password</label>
+			<input type="password" name="password" id="password" placeholder="password" />
+		</div>
+
+		<div class="field">
+			<label for="password">new password</label>
+			<input type="password" name="newPassword" id="newPassword" placeholder="new password" />
+		</div>
+
+		<div class="field">
+			<label for="address">address</label>
+			<input
+				type="text"
+				name="address"
+				id="address"
+				placeholder="address"
+				value={userInfo?.address ?? ''}
+			/>
+		</div>
+
+		<button type="submit">Save</button>
+	</div>
+</form>
 
 <style>
-	.container {
-		display: flex;
-		flex-direction: column;
-		align-items: stretch;
-		justify-content: center;
-		gap: 1rem;
+	h1 {
+		text-align: center;
+		padding: 20px;
 	}
 
 	form {
