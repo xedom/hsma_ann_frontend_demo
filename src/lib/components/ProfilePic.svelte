@@ -55,7 +55,7 @@
 	{#if file}
 		<img src={file.src} alt="product" />
 	{:else}
-		<div class="empty">UPLAOD</div>
+		<div class="empty">UPLOAD</div>
 	{/if}
 </button>
 

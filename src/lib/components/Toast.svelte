@@ -25,6 +25,21 @@
 
 	const toastStore = writable<Toast[]>([]);
 
+	/**
+	 * @param toast
+	 * @param toast.title
+	 * @param toast.description
+	 * @param toast.duration
+	 * @param toast.status
+	 * @returns
+	 * @example
+	 * addToast({ description: 'Product created successfully' });
+	 * addToast({ description: 'Product created successfully', status: ToastStatus.SUCCESS });
+	 * addToast({ description: 'Product created successfully', status: ToastStatus.SUCCESS, duration: 5000 });
+	 * addToast({ description: 'Product created successfully', status: ToastStatus.SUCCESS, duration: 5000, title: 'Product created' });
+	 * addToast({ description: 'Product created successfully', status: ToastStatus.SUCCESS, duration: 5000, title: 'Product created', id: '123' });
+	 *
+	 */
 	export const addToast = (toast: Partial<Toast>) => {
 		const _toast = {
 			...defaultToast,

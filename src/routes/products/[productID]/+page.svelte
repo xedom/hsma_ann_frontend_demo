@@ -4,12 +4,13 @@
 	import { env } from '$env/dynamic/public';
 	import { parseMoney } from '$lib/utils/parser';
 	import Rating from '$lib/components/Rating.svelte';
-	import { apiGetProduct } from '$lib/api';
+	import { apiAddProductToCart, apiGetProduct } from '$lib/api';
 	import { ToastStatus, addToast } from '$lib/components/Toast.svelte';
 
 	const productID = $page.params.productID;
 	// const productID = $page.url.searchParams.get('id');
 
+	let quantity = 1;
 	let bigImage = '';
 	const changeBigImage = (image: string) => {
 		bigImage = image;
@@ -21,6 +22,20 @@
 		price: 0,
 		images: [],
 		rating: 0
+	};
+
+	const handleAddToCart = async () => {
+		console.log('add to cart ' + quantity + ' of product ' + productID);
+
+		try {
+			await apiAddProductToCart(productID, quantity);
+
+			addToast({ description: 'Product added to cart', status: ToastStatus.SUCCESS });
+			quantity = 0;
+		} catch (error) {
+			if (error instanceof Error)
+				addToast({ description: error.message, status: ToastStatus.ERROR });
+		}
 	};
 
 	onMount(async () => {
@@ -53,6 +68,17 @@
 			<h1 class="title">{product.name.toUpperCase()}</h1>
 			<div class="price"><b>Price:</b> {parseMoney(product.price)}</div>
 			<div class="rating"><b>Rating:</b> <Rating rating={product.rating} /></div>
+			<div class="button">
+				<input
+					bind:value={quantity}
+					type="text"
+					pattern="[0-9]*"
+					name="quantity"
+					id="quantity"
+					placeholder="Quantity"
+				/>
+				<button on:click={handleAddToCart}>Add to cart</button>
+			</div>
 			<div class="description"><b>Description:</b> {product.description}</div>
 		</div>
 	</div>

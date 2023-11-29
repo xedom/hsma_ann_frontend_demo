@@ -4,13 +4,13 @@
 	import Rating from '$lib/components/Rating.svelte';
 
 	const dispatch = createEventDispatcher();
-	let quantity = 1;
 
 	export let id: string = '';
 	export let name: string = '';
 	export let price: number = 0;
 	export let rating: number = 0;
 	export let image: string = '';
+	export let quantity: number = 1;
 </script>
 
 <div class="productListItem" {id}>
@@ -21,15 +21,11 @@
 		<div class="preis">{parseMoney(price)}</div>
 	</div>
 	<div class="actions">
-		<button on:click={() => dispatch('remove')}>Remove</button>
-		<span>
-			Quantity: <input
-				type="text"
-				pattern="[0-9]*"
-				bind:value={quantity}
-				on:change={() => dispatch('update', quantity)}
-			/>
-		</span>
+		<span>Quantity: <input type="text" pattern="[0-9]*" bind:value={quantity} /></span>
+		<div class="buttons">
+			<button class="error" on:click={() => dispatch('remove')}>Remove</button>
+			<button on:click={() => dispatch('save', quantity)}>Save</button>
+		</div>
 	</div>
 </div>
 
@@ -41,6 +37,12 @@
 		text-decoration: none;
 		color: inherit;
 		display: flex;
+	}
+
+	.productListItem img {
+		width: 200px;
+		height: 200px;
+		object-fit: cover;
 	}
 
 	.productListItem .body {
