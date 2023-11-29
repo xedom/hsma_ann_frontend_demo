@@ -131,22 +131,14 @@
 		/* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
 	}
 
-	.left {
+	form .left {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 	}
 
-	.left img {
-		width: 200px;
-		height: 200px;
-		border-radius: 50%;
-		object-fit: cover;
-		border: 1px dashed #464646;
-	}
-
-	.right {
+	form .right {
 		flex: 1;
 		display: flex;
 		flex-direction: column;
@@ -155,7 +147,7 @@
 		gap: 1rem;
 	}
 
-	.field {
+	form .field {
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;

@@ -60,31 +60,28 @@
 	};
 </script>
 
-<div class="container">
-	<h1>Cart (Total cost: {parseMoney(totalCost)})</h1>
-	<div class="products">
-		{#each cartProducts as product}
-			<ProductListItem
-				on:remove={() => removeProduct(product.id.toString())}
-				on:update={(e) => updateProduct(product.id.toString(), e.detail)}
-				id={product.id.toString()}
-				name={product.name}
-				price={product.price}
-				rating={product.rating}
-				image={product.image ?? 'https://picsum.photos/id/26/200/?blur=10'}
-			/>
-		{/each}
-	</div>
+<h1>Cart (Total cost: {parseMoney(totalCost)})</h1>
+<div class="products">
+	{#each cartProducts as product}
+		<ProductListItem
+			on:remove={() => removeProduct(product.id.toString())}
+			on:update={(e) => updateProduct(product.id.toString(), e.detail)}
+			id={product.id.toString()}
+			name={product.name}
+			price={product.price}
+			rating={product.rating}
+			image={product.image ?? 'https://picsum.photos/id/26/200/?blur=10'}
+		/>
+	{/each}
 </div>
 
 <style>
-	.container {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
+	h1 {
+		text-align: center;
+		padding: 20px;
 	}
 	.products {
+		margin: 0 auto;
 		width: 900px;
 		max-width: 900px;
 		display: flex;

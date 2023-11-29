@@ -66,11 +66,6 @@
 
 	form {
 		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		gap: 30px;
-		align-items: flex-start;
-
 		margin: 0 auto;
 		display: flex;
 		justify-content: center;
