@@ -12,3 +12,18 @@ export type Product = {
 	rating: number;
 	images: string[];
 };
+
+export type CartProduct = {
+	id: string;
+	itemID: string;
+	name: string;
+	price: number;
+	quantity: number;
+	rating: number;
+	image: string;
+};
+
+export type Order = {
+	_id: string;
+	items: CartProduct[];
+};

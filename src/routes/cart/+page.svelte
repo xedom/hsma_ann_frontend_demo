@@ -12,7 +12,6 @@
 	import { ToastStatus, addToast } from '$lib/components/Toast.svelte';
 	import { parseMoney } from '$lib/utils/parser';
 	import { onMount } from 'svelte';
-	import { parse } from 'svelte/compiler';
 
 	type ResponseCartItem = { _id: string; productID: string; quantity: number };
 

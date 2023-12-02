@@ -56,8 +56,8 @@
 	}
 
 	.userCard img {
-		width: 200px;
-		height: 200px;
+		width: 160px;
+		height: 160px;
 		border-radius: 50%;
 	}
 
