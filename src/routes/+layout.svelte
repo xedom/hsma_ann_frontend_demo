@@ -4,7 +4,6 @@
 	import Toast from '$lib/components/Toast.svelte';
 	import './globalstyle.css';
 
-	export const ssr = false;
 </script>
 
 <svelte:head>

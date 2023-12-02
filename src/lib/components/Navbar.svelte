@@ -19,24 +19,21 @@
 		try {
 			const { profilePic, ...rest } = await apiGetLoggedUser();
 			const pic = profilePic ? `data:image/jpeg;base64,${profilePic}` : '/images/rect.png';
-			$user = {
-				...rest,
-				profilePic: pic
-			};
+			$user = { ...rest, profilePic: pic };
 		} catch (e) {
-			user.set(undefined);
-			if (!(e instanceof Error))
-				return addToast({
-					title: 'User error',
-					description: 'Generic error',
-					status: ToastStatus.ERROR
-				});
+			$user = undefined;
+			// if (e instanceof Error)
+			// 	return addToast({
+			// 	title: 'User error',
+			// 	description: e.message,
+			// 	status: ToastStatus.ERROR
+			// });
 
-			addToast({
-				title: 'User error',
-				description: e.message,
-				status: ToastStatus.ERROR
-			});
+			// addToast({
+			// 	title: 'User error',
+			// 	description: 'Generic error',
+			// 	status: ToastStatus.ERROR
+			// });
 		}
 	});
 </script>
