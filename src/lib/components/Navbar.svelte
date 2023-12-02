@@ -17,8 +17,12 @@
 
 	onMount(async () => {
 		try {
-			const fetchedUser = await apiGetLoggedUser();
-			$user = { ...fetchedUser, profilePic: `data:image/jpeg;base64,${fetchedUser.profilePic}` };
+			const { profilePic, ...rest } = await apiGetLoggedUser();
+			const pic = profilePic ? `data:image/jpeg;base64,${profilePic}` : '/images/rect.png';
+			$user = {
+				...rest,
+				profilePic: pic
+			};
 		} catch (e) {
 			user.set(undefined);
 			if (!(e instanceof Error))
@@ -58,11 +62,8 @@
 			<a href="/logout">logout</a>
 			<a id="username" href={`/users/${$user?.username}`}>
 				<span>{$user?.username}</span>
-				<img
-					src={$user?.profilePic || '/images/userProfilePicture.jpg'}
-					alt="User Profile"
-					class="userpicture"
-				/>
+				<img src={$user?.profilePic} alt="User Profile" class="userpicture" />
+				<!-- <img alt="User Profile" class="userpicture" /> -->
 			</a>
 		{/if}
 	</div>
@@ -73,12 +74,12 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: stretch;
-		padding: 0 1rem;
 		background-color: #fff;
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-		padding: 0.5rem;
 		border-radius: 10px;
 		color: #000;
+		height: 50px;
+		padding-right: 1rem;
 	}
 
 	nav a {

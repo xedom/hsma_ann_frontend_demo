@@ -19,7 +19,7 @@
 			name={product.name}
 			price={product.price}
 			rating={product.rating}
-			image={product.images[0] ?? 'https://picsum.photos/id/26/200/?blur=10'}
+			image={product.images[0]}
 		/>
 	{/each}
 </div>

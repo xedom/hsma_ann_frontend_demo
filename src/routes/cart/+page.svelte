@@ -1,5 +1,13 @@
 <script lang="ts">
-	import { apiGetCart, apiGetProduct, apiRemoveItemFromCart, apiUpdateItemInCart } from '$lib/api';
+	import { invalidateAll } from '$app/navigation';
+	import {
+		apiCheckoutCart,
+		apiClearCart,
+		apiGetCart,
+		apiGetProduct,
+		apiRemoveItemFromCart,
+		apiUpdateItemInCart
+	} from '$lib/api';
 	import ProductListItem from '$lib/components/ProductListItem.svelte';
 	import { ToastStatus, addToast } from '$lib/components/Toast.svelte';
 	import { parseMoney } from '$lib/utils/parser';
@@ -56,6 +64,36 @@
 		}
 	};
 
+	const onClear = async () => {
+		try {
+			await apiClearCart();
+
+			addToast({ description: 'Cart cleared', status: ToastStatus.SUCCESS });
+			cartProducts = [];
+
+			await invalidateAll();
+		} catch (error) {
+			if (error instanceof Error) {
+				addToast({ description: 'Failed to clear cart', status: ToastStatus.ERROR });
+			}
+		}
+	};
+
+	const onCheckout = async () => {
+		try {
+			await apiCheckoutCart();
+
+			addToast({ description: 'Cart cleared', status: ToastStatus.SUCCESS });
+			cartProducts = [];
+
+			await invalidateAll();
+		} catch (error) {
+			if (error instanceof Error) {
+				addToast({ description: 'Failed to clear cart', status: ToastStatus.ERROR });
+			}
+		}
+	};
+
 	onMount(async () => {
 		const res = await apiGetCart();
 		const { items: cartItems } = res;
@@ -64,9 +102,8 @@
 			...new Set(cartItems.map((item: ResponseCartItem) => item.productID))
 		];
 
-		const fetchProductsInfo = uniqueProductIDs.map((productID) =>
-			apiGetProduct(productID as string)
-		);
+		// @ts-ignore
+		const fetchProductsInfo = uniqueProductIDs.map(apiGetProduct);
 
 		const fetchedProductsInfo = await Promise.allSettled(fetchProductsInfo);
 
@@ -103,6 +140,10 @@
 </script>
 
 <h1>Cart (Total cost: {parseMoney(totalCost)})</h1>
+<div class="buttons">
+	<button on:click={onClear}>Clear cart</button>
+	<button on:click={onCheckout}>Checkout</button>
+</div>
 <div class="products">
 	{#if cartProducts.length === 0}
 		<div class="empty">
@@ -120,7 +161,7 @@
 			price={product.price}
 			rating={product.rating}
 			bind:quantity={product.quantity}
-			image={product.image ?? 'https://picsum.photos/id/26/200/?blur=10'}
+			image={product.image}
 		/>
 	{/each}
 </div>
@@ -131,12 +172,20 @@
 		padding: 20px;
 	}
 
+	.buttons {
+		display: flex;
+		justify-content: center;
+		gap: 10px;
+		padding-bottom: 1rem;
+	}
+
 	.empty {
 		text-align: center;
 		padding: 20px;
 		background-color: #d5d5d5;
 		border-radius: 10px;
 	}
+
 	.products {
 		margin: 0 auto;
 		width: 900px;

@@ -6,11 +6,15 @@
 	export let name: string = '';
 	export let price: number = 0;
 	export let rating: number = 0;
-	export let image: string = '';
+	export let image: string | undefined = undefined;
 </script>
 
 <a class="card" href="/products/{id}">
-	<img src={image} alt="produktbild" draggable={false} />
+	{#if image}
+		<img src={image} alt="produktbild" draggable={false} />
+	{:else}
+		<div class="placeholder">Bild nicht verfügbar</div>
+	{/if}
 	<div class="body">
 		<div class="title">{name.toUpperCase()}</div>
 		<Rating {rating} />
@@ -38,6 +42,14 @@
 		aspect-ratio: 1/1;
 		object-fit: cover;
 		user-select: none;
+	}
+
+	.card .placeholder {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 150px;
+		background-color: #c5c5c5;
 	}
 
 	.card .body {

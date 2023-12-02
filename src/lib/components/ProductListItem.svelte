@@ -9,23 +9,37 @@
 	export let name: string = '';
 	export let price: number = 0;
 	export let rating: number = 0;
-	export let image: string = '';
+	export let image: string | undefined;
 	export let quantity: number = 1;
+	export let editable: boolean = true;
 </script>
 
 <div class="productListItem" {id}>
-	<img src={image} alt="produktbild" draggable={false} />
+	{#if image}
+		<img src={image} alt="produktbild" draggable={false} />
+	{:else}
+		<div class="placeholder">Bild nicht verfügbar</div>
+	{/if}
 	<div class="body">
 		<div class="title">{name.toUpperCase()}</div>
 		<Rating {rating} />
 		<div class="preis">{parseMoney(price)}</div>
 	</div>
 	<div class="actions">
-		<span>Quantity: <input type="text" pattern="[0-9]*" bind:value={quantity} /></span>
-		<div class="buttons">
-			<button class="error" on:click={() => dispatch('remove')}>Remove</button>
-			<button on:click={() => dispatch('save', quantity)}>Save</button>
-		</div>
+		<span
+			>Quantity:
+			{#if editable}
+				<input type="number" min="1" max="99" bind:value={quantity} />
+			{:else}
+				{quantity}
+			{/if}
+		</span>
+		{#if editable}
+			<div class="buttons">
+				<button class="error" on:click={() => dispatch('remove')}>Remove</button>
+				<button on:click={() => dispatch('save', quantity)}>Save</button>
+			</div>
+		{/if}
 	</div>
 </div>
 
@@ -40,9 +54,19 @@
 	}
 
 	.productListItem img {
-		width: 200px;
-		height: 200px;
+		width: 128px;
+		height: 128px;
 		object-fit: cover;
+	}
+
+	.productListItem .placeholder {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		width: 128px;
+		height: 128px;
+		background-color: #c5c5c5;
 	}
 
 	.productListItem .body {
@@ -51,6 +75,10 @@
 		flex-direction: column;
 		padding: 10px;
 		gap: 5px;
+	}
+
+	.productListItem .body .title {
+		font-weight: bold;
 	}
 
 	.productListItem .actions {
@@ -64,6 +92,7 @@
 
 	.productListItem .actions input {
 		width: 50px;
+		height: 30px;
 		background-color: #d5d5d5;
 		text-align: center;
 	}

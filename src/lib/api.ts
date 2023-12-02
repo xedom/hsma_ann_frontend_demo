@@ -112,10 +112,22 @@ export const apiGetCart = async () => {
 	return await api_get('/cart');
 }
 
+export const apiClearCart = async () => {
+	return await api_delete('/cart');
+}
+
+export const apiCheckoutCart = async () => {
+	return await api_post('/cart/checkout', {});
+}
+
 export const apiRemoveItemFromCart = async (itemID: string) => {
 	return await api_delete(`/cart/items/${itemID}`);
 }
 
 export const apiUpdateItemInCart = async (itemID: string, quantity: number) => {
 	return await api_put(`/cart/items/${itemID}`, { quantity });
+}
+
+export const apiGetOrders = async () => {
+	return await api_get('/orders');
 }

@@ -1,38 +1,25 @@
 <script lang="ts">
-	import ProductCard from '$lib/components/ProductCard.svelte';
 	import { onMount } from 'svelte';
-	import { page } from '$app/stores';
 	import { apiGetUsers } from '$lib/api';
 	import type { User } from '$lib/types';
 	import { writable, type Writable } from 'svelte/store';
 
-	const username = $page.params.username;
 	const users: Writable<User[] | undefined> = writable(undefined);
-
-	let userProducts = [
-		{ id: '1', name: 'Product 2', price: 10, image: 'https://picsum.photos/100' },
-		{ id: '2', name: 'Product 2', price: 10, image: 'https://picsum.photos/200' },
-		{ id: '3', name: 'Product 2', price: 10, image: 'https://picsum.photos/300' },
-		{ id: '4', name: 'Product 2', price: 10, image: 'https://picsum.photos/400' },
-		{ id: '5', name: 'Product 2', price: 10, image: 'https://picsum.photos/500' },
-		{ id: '6', name: 'Product 2', price: 10, image: 'https://picsum.photos/600' },
-		{ id: '7', name: 'Product 2', price: 10, image: 'https://picsum.photos/250' }
-	];
 
 	onMount(async () => {
 		const fetchedUsers = await apiGetUsers();
 
-		$users = fetchedUsers.map((user: User) => ({
-			...user,
-			profilePic: `data:image/jpeg;base64,${user.profilePic}`
-		}));
+		for (let user of fetchedUsers) {
+			const { profilePic } = user;
+			user.profilePic = profilePic ? `data:image/jpeg;base64,${profilePic}` : '/images/rect.png';
+		}
+
+		$users = fetchedUsers;
 	});
 </script>
 
 <div class="container">
-	{#if $users === undefined}
-		Loading...
-	{:else}
+	{#if $users}
 		{#each $users as user}
 			<a class="userCard" href={`/users/${user.username}`}>
 				<img src={user.profilePic} alt="User" />
@@ -42,6 +29,8 @@
 				</div>
 			</a>
 		{/each}
+	{:else}
+		Loading...
 	{/if}
 </div>
 
