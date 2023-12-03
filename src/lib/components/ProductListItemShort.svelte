@@ -5,7 +5,7 @@
 	export let name: string = '';
 	export let price: number = 0;
 	export let image: string | undefined;
-	export let quantity: number | undefined;
+	export let quantity: number | undefined = undefined;
 </script>
 
 <a class="productListItem" {id} href={`/products/${id}`} target="_blank" rel="noopener">
