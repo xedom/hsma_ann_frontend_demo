@@ -26,5 +26,6 @@ export type CartProduct = {
 export type Order = {
 	_id: string;
 	date: string;
+	total: number;
 	items: CartProduct[];
 };

@@ -2,7 +2,7 @@
 	import { apiGetOrders, apiGetProduct } from '$lib/api';
 	import ProductListItemShort from '$lib/components/ProductListItemShort.svelte';
 	import type { Order } from '$lib/types';
-	import { parseDate } from '$lib/utils/parser';
+	import { parseDate, parseMoney } from '$lib/utils/parser';
 	import { onMount } from 'svelte';
 
 	// @ts-ignore
@@ -64,6 +64,7 @@
 	{/if}
 	{#each orderList as order}
 		<div class="orderid">
+			<div><b>Total price:</b> {parseMoney(order.total)}</div>
 			<div><b>Date:</b> {parseDate(order.date)}</div>
 			<div><b>Order ID:</b> {order._id}</div>
 		</div>
