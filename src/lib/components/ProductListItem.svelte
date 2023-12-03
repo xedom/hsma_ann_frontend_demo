@@ -11,7 +11,6 @@
 	export let rating: number = 0;
 	export let image: string | undefined;
 	export let quantity: number = 1;
-	export let editable: boolean = true;
 </script>
 
 <div class="productListItem" {id}>
@@ -28,18 +27,12 @@
 	<div class="actions">
 		<span
 			>Quantity:
-			{#if editable}
-				<input type="text" pattern="[0-9]" min="1" max="99" bind:value={quantity} />
-			{:else}
-				{quantity}
-			{/if}
+			<input type="text" pattern="[0-9]" min="1" max="99" bind:value={quantity} />
 		</span>
-		{#if editable}
-			<div class="buttons">
-				<button class="error" on:click={() => dispatch('remove')}>Remove</button>
-				<button on:click={() => dispatch('save', quantity)}>Save</button>
-			</div>
-		{/if}
+		<div class="buttons">
+			<button class="error" on:click={() => dispatch('remove')}>Remove</button>
+			<button on:click={() => dispatch('save', quantity)}>Save</button>
+		</div>
 	</div>
 </div>
 

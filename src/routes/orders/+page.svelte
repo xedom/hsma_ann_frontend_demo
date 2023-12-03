@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { apiGetOrders, apiGetProduct } from '$lib/api';
-	import ProductListItem from '$lib/components/ProductListItem.svelte';
+	import ProductListItemShort from '$lib/components/ProductListItemShort.svelte';
 	import type { Order } from '$lib/types';
 	import { parseDate } from '$lib/utils/parser';
 	import { onMount } from 'svelte';
@@ -21,30 +21,35 @@
 
 		if (fetchedProductsInfo.length == 0) return;
 
-		// @ts-ignore
-		orderList = orders.map((order) => {
-			return {
-				...order,
-				// @ts-ignore
-				items: order.items.map((item) => {
-					const itemInfo = fetchedProductsInfo.find(
-						// @ts-ignore
-						(product) => product.value?._id === item.productID
-					);
+		orderList = orders
+			// @ts-ignore
+			.map((order) => {
+				return {
+					...order,
+					// @ts-ignore
+					items: order.items.map((item) => {
+						const itemInfo = fetchedProductsInfo.find(
+							// @ts-ignore
+							(product) => product.value?._id === item.productID
+						);
 
-					return {
-						...item,
-						// @ts-ignore
-						name: itemInfo.value.name || 'Product not found',
-						// @ts-ignore
-						price: itemInfo.value.price || 0,
-						// @ts-ignore
-						rating: itemInfo.value.rating || 0,
-						// @ts-ignore
-						image: itemInfo.value.images[0] || 'https://picsum.photos/id/26/200/?blur=10'
-					};
-				})
-			};
+						return {
+							...item,
+							// @ts-ignore
+							name: itemInfo.value.name || 'Product not found',
+							// @ts-ignore
+							price: itemInfo.value.price || 0,
+							// @ts-ignore
+							rating: itemInfo.value.rating || 0,
+							// @ts-ignore
+							image: itemInfo.value.images[0] || undefined
+						};
+					})
+				};
+			});
+
+		orderList = orderList.sort((a, b) => {
+			return new Date(b.date).getTime() - new Date(a.date).getTime();
 		});
 	});
 </script>
@@ -63,12 +68,10 @@
 			<div><b>Order ID:</b> {order._id}</div>
 		</div>
 		{#each order.items as product}
-			<ProductListItem
-				editable={false}
-				id={product.id}
+			<ProductListItemShort
+				id={product.productID}
 				name={product.name}
 				price={product.price}
-				rating={product.rating}
 				bind:quantity={product.quantity}
 				image={product.image}
 			/>
