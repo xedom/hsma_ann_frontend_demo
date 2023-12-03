@@ -32,7 +32,6 @@
 	const removeProduct = async (itemID: string) => {
 		try {
 			const res = await apiRemoveItemFromCart(itemID);
-			console.log(res);
 			cartProducts = cartProducts.filter((product) => product.itemID !== itemID);
 			addToast({ description: 'Product removed from cart', status: ToastStatus.SUCCESS });
 		} catch (error) {
@@ -46,7 +45,6 @@
 		try {
 			quantity = parseInt(quantity.toString());
 			const res = await apiUpdateItemInCart(id, quantity);
-			console.log(res);
 
 			// updating the quantity of the product in the cartProducts array
 			// to avoid making another request to the server

@@ -24,17 +24,6 @@ export const api_get = async (url: string) => {
 export const api_post = async (url: string, data: any) => {
 	url = env.PUBLIC_API_URL + url;
 
-	console.log('api_post', url, data, {
-		method: 'POST',
-		credentials: 'include',
-		mode: 'cors',
-		headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-			// Authorization: `Bearer ${loggedUserToken}`
-		},
-		body: JSON.stringify(data)
-	});
 	const response = await fetch(url, {
 		method: 'POST',
 		credentials: 'include',

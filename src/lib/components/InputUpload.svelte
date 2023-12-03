@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { writable } from 'svelte/store';
+	import { ToastStatus, addToast } from './Toast.svelte';
 
 	let previewIndex = writable<number>(0);
 
@@ -37,7 +38,7 @@
 		if (!multiple) items = [items[0]];
 		for (let file of [...items]) {
 			const error = validateFile(file.name);
-			if (error) console.log('invalidFormat', error);
+			if (error) addToast({ description: error, status: ToastStatus.ERROR });
 
 			const reader = new FileReader();
 			reader.addEventListener('load', () => {
@@ -58,7 +59,6 @@
 	}
 
 	function setPreview(i: number) {
-		console.log('setPreview', i);
 		$previewIndex = i;
 	}
 

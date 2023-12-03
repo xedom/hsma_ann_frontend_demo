@@ -25,8 +25,6 @@
 	};
 
 	const handleAddToCart = async () => {
-		console.log('add to cart ' + quantity + ' of product ' + productID);
-
 		try {
 			await apiAddProductToCart(productID, quantity);
 

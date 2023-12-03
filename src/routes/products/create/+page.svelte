@@ -12,7 +12,6 @@
 
 		try {
 			const res = await apiCreateProduct({ name, price });
-			console.log(res);
 
 			addToast({ description: 'Product created successfully' });
 			goto('/product');

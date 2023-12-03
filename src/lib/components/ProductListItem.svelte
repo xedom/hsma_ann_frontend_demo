@@ -29,7 +29,7 @@
 		<span
 			>Quantity:
 			{#if editable}
-				<input type="number" min="1" max="99" bind:value={quantity} />
+				<input type="text" pattern="[0-9]" min="1" max="99" bind:value={quantity} />
 			{:else}
 				{quantity}
 			{/if}
