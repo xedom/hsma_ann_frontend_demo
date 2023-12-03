@@ -2,6 +2,7 @@
 	import { apiGetOrders, apiGetProduct } from '$lib/api';
 	import ProductListItem from '$lib/components/ProductListItem.svelte';
 	import type { Order } from '$lib/types';
+	import { parseDate } from '$lib/utils/parser';
 	import { onMount } from 'svelte';
 
 	// @ts-ignore
@@ -57,7 +58,10 @@
 		</div>
 	{/if}
 	{#each orderList as order}
-		<div class="orderid">Order ID {order._id}</div>
+		<div class="orderid">
+			<div><b>Date:</b> {parseDate(order.date)}</div>
+			<div><b>Order ID:</b> {order._id}</div>
+		</div>
 		{#each order.items as product}
 			<ProductListItem
 				editable={false}
@@ -87,9 +91,6 @@
 	}
 
 	.orderid {
-		font-size: 20px;
-		font-weight: bold;
-		padding: 10px;
 		text-align: right;
 	}
 
