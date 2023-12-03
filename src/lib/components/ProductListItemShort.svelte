@@ -5,7 +5,7 @@
 	export let name: string = '';
 	export let price: number = 0;
 	export let image: string | undefined;
-	export let quantity: number = 1;
+	export let quantity: number | undefined;
 </script>
 
 <a class="productListItem" {id} href={`/products/${id}`} target="_blank" rel="noopener">
@@ -16,8 +16,9 @@
 	{/if}
 	<div class="body">
 		<span class="title">{name.toUpperCase()}</span>
-		<span>Quantity: {quantity}</span>
-		|
+		{#if quantity}
+			<span>Quantity: {quantity}</span> |
+		{/if}
 		<span class="preis">Cost: {parseMoney(price)}</span>
 	</div>
 </a>

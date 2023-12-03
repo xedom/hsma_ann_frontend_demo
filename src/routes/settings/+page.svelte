@@ -10,7 +10,9 @@
 
 	let picImage = '';
 	const formActionUrl = `${env.PUBLIC_API_URL}/users/settings`;
-	let userInfo: { username: string; email: string; address: string } | undefined;
+	let userInfo:
+		| { username: string; profilePic: string; email: string; address: string }
+		| undefined;
 
 	const handlePicError = (e: CustomEvent<{ error: string }>) => {
 		addToast({ description: e.detail.error, status: ToastStatus.ERROR });
@@ -42,8 +44,10 @@
 	onMount(async () => {
 		try {
 			const data = await apiGetLoggedUser();
+			console.log('data', data);
 			userInfo = {
 				username: data.username,
+				profilePic: data.profilePic,
 				email: data.email,
 				address: `${data.address.street}, ${data.address.city}, ${data.address.state}, ${data.address.country}`
 			};
@@ -58,7 +62,7 @@
 <h1>Settings</h1>
 <form action={formActionUrl} method="POST" enctype="multipart/form-data">
 	<div class="left">
-		<ProfilePic name="image" on:error={handlePicError} />
+		<ProfilePic name="image" image={userInfo?.profilePic} on:error={handlePicError} />
 		<!-- <h5>uploaded image preview:</h5>
 			<img src={picImage} alt="" /> -->
 	</div>
@@ -70,20 +74,13 @@
 				type="text"
 				name="username"
 				id="username"
-				placeholder="username"
-				value={userInfo?.username ?? ''}
+				placeholder={userInfo?.username ?? 'username'}
 			/>
 		</div>
 
 		<div class="field">
 			<label for="email">email</label>
-			<input
-				type="email"
-				name="email"
-				id="email"
-				placeholder="email"
-				value={userInfo?.email ?? ''}
-			/>
+			<input type="email" name="email" id="email" placeholder={userInfo?.email ?? 'email'} />
 		</div>
 
 		<div class="field">
@@ -98,13 +95,7 @@
 
 		<div class="field">
 			<label for="address">address</label>
-			<input
-				type="text"
-				name="address"
-				id="address"
-				placeholder="address"
-				value={userInfo?.address ?? ''}
-			/>
+			<input type="text" name="address" id="address" placeholder={userInfo?.address ?? 'address'} />
 		</div>
 
 		<button type="submit">Save</button>

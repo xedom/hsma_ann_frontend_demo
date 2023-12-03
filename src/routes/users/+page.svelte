@@ -24,7 +24,7 @@
 			<a class="userCard" href={`/users/${user.username}`}>
 				<img src={user.profilePic} alt="User" />
 				<div class="username">
-					<h1>{user.username}</h1>
+					<h2>{user.username}</h2>
 					<p>{user.email}</p>
 				</div>
 			</a>
@@ -53,12 +53,15 @@
 		align-items: center;
 		text-decoration: none;
 		color: inherit;
+		padding-top: 10px;
 	}
 
 	.userCard img {
 		width: 160px;
 		height: 160px;
+		object-fit: cover;
 		border-radius: 50%;
+		box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 	}
 
 	.userCard .username {

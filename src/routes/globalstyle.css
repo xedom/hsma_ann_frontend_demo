@@ -35,6 +35,11 @@ button {
 	border-radius: 0.25rem;
 }
 
+input[type='checkbox'] {
+	width: 20px;
+	height: 20px;
+}
+
 button {
 	cursor: pointer;
 	background-color: #16bdb3;
@@ -42,6 +47,11 @@ button {
 	padding: 0.5rem 1rem;
 	font-weight: bold;
 	text-transform: uppercase;
+	transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+	background-color: #0e9c93;
 }
 
 button.error {

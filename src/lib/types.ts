@@ -1,4 +1,5 @@
 export type User = {
+	id: string;
 	username: string;
 	email: string;
 	profilePic: string;
@@ -11,6 +12,14 @@ export type Product = {
 	price: number;
 	rating: number;
 	images: string[];
+};
+
+export type ProductListItem = {
+	_id: string;
+	name: string;
+	price: number;
+	rating: number;
+	image: string;
 };
 
 export type CartProduct = {

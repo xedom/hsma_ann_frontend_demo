@@ -7,7 +7,7 @@
 	const links = [
 		{ name: 'home', href: '/', public: true },
 		{ name: 'users', href: '/users', public: true },
-		{ name: 'create product', href: '/products/create', public: false },
+		// { name: 'sell', href: '/products/sell', public: false },
 		{ name: 'orders', href: '/orders', public: false },
 		{ name: 'cart', href: '/cart', public: false },
 		{ name: 'settings', href: '/settings', public: false }

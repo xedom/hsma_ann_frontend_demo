@@ -2,6 +2,7 @@
 	import { createEventDispatcher } from 'svelte';
 
 	export let name: string = 'image';
+	export let image: string | undefined = undefined;
 
 	interface $$Events {
 		error: CustomEvent<{ error: string }>;
@@ -54,6 +55,9 @@
 <button class="image" type="button" on:click={click}>
 	{#if file}
 		<img src={file.src} alt="product" />
+	{:else if image}
+		<div class="empty">UPLOAD</div>
+		<img src={`data:image/png;base64,${image}`} alt="product" />
 	{:else}
 		<div class="empty">UPLOAD</div>
 	{/if}
@@ -73,6 +77,7 @@
 		overflow: hidden;
 		border: 1px solid #464646;
 		background-color: transparent;
+		position: relative;
 	}
 
 	button.image img {
@@ -82,13 +87,15 @@
 	}
 
 	.empty {
+		position: absolute;
+		top: 0;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		height: 100%;
 		width: 100%;
 		font-size: 1rem;
-		background: #252525;
+		background: #000000aa;
 		color: #fff;
 	}
 </style>
