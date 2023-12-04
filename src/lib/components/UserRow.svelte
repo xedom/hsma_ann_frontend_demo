@@ -35,7 +35,7 @@
 
 <style>
 	.row {
-		background-color: #eeeeee;
+		background-color: #f2f2f2;
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;

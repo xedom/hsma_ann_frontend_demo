@@ -25,7 +25,7 @@
 	<button>Set as admin</button>
 	<button>Set as vendor</button>
 	<button>Set as user</button>
-	<button>Delete</button>
+	<button class="danger">Delete</button>
 </div>
 
 <div class="container">

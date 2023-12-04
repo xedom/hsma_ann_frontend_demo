@@ -30,7 +30,7 @@
 			<input type="text" pattern="[0-9]" min="1" max="99" bind:value={quantity} />
 		</span>
 		<div class="buttons">
-			<button class="error" on:click={() => dispatch('remove')}>Remove</button>
+			<button class="danger" on:click={() => dispatch('remove')}>Remove</button>
 			<button on:click={() => dispatch('save', quantity)}>Save</button>
 		</div>
 	</div>

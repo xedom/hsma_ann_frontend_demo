@@ -6,6 +6,7 @@
 	import ProductRow from '$lib/components/ProductRow.svelte';
 	import ProductListItemShort from '$lib/components/ProductListItemShort.svelte';
 	import Table from '$lib/components/Table.svelte';
+	import { parseMoney } from '$lib/utils/parser';
 
 	const products: Writable<ProductListItem[] | undefined> = writable(undefined);
 
@@ -24,23 +25,30 @@
 <h1>Products</h1>
 <hr />
 
-<div class="actions">
+<!-- <div class="actions">
 	<button>Add product</button>
-	<button>Delete</button>
-</div>
-
-<Table />
+	<button>Edit</button>
+	<button class="danger">Delete</button>
+</div> -->
 
 <div class="container">
+	<br />
 	{#if $products}
-		{#each $products as product}
+		<Table
+			data={$products.map(({ name, price, images }) => ({
+				name,
+				price: parseMoney(price),
+				image: images[0]
+			}))}
+		/>
+		<!-- {#each $products as product}
 			<ProductListItemShort
 				id={product._id}
 				name={product.name}
 				price={product.price}
 				image={product.images[0]}
 			/>
-		{/each}
+		{/each} -->
 	{/if}
 </div>
 
