@@ -41,7 +41,7 @@
 		align-items: center;
 		gap: 10px;
 		padding: 10px 15px;
-		border-radius: 10px;
+		border-radius: var(--radius);
 	}
 
 	.row a {

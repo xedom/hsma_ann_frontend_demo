@@ -92,7 +92,7 @@
 
 	.toast {
 		border: none;
-		border-radius: 5px;
+		border-radius: var(--radius);
 		padding: 10px 20px;
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 		display: flex;

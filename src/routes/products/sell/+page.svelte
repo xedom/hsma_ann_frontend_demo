@@ -73,7 +73,7 @@
 		max-width: 800px;
 		padding: 2rem;
 		gap: 2rem;
-		border-radius: 10px;
+		border-radius: var(--radius);
 		background-color: #d5d5d5;
 	}
 

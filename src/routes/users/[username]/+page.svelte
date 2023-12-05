@@ -75,7 +75,7 @@
 	.userpictureBig {
 		height: 300px;
 		width: 300px;
-		border-radius: 400px;
+		border-radius: 50%;
 		object-fit: cover;
 	}
 

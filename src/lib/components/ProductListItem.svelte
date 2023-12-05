@@ -39,7 +39,7 @@
 <style>
 	.productListItem {
 		background-color: #fff;
-		border-radius: 10px;
+		border-radius: var(--radius);
 		overflow: hidden;
 		text-decoration: none;
 		color: inherit;

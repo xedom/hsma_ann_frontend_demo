@@ -41,7 +41,7 @@
 		width: 100%;
 		border-spacing: 0;
 		border-collapse: separate;
-		border-radius: 5px;
+		border-radius: var(--radius);
 		overflow: hidden;
 	}
 

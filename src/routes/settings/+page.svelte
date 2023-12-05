@@ -117,7 +117,7 @@
 		max-width: 800px;
 		padding: 2rem;
 		gap: 2rem;
-		border-radius: 10px;
+		border-radius: var(--radius);
 		background-color: #d5d5d5;
 		/* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
 	}

@@ -4,6 +4,8 @@
 :root {
 	--font-body: 'Open Sans', -apple-system, sans-serif;
 	--font-mono: 'Fira Mono', monospace;
+
+	--radius: 8px;
 }
 
 * {
@@ -32,7 +34,7 @@ button {
 	outline: none;
 	border: none;
 	padding: 0.5rem;
-	border-radius: 0.25rem;
+	border-radius: var(--radius);
 }
 
 input[type='checkbox'] {
@@ -61,4 +63,10 @@ button.error {
 label {
 	font-weight: bold;
 	text-transform: uppercase;
+}
+
+hr {
+	border: none;
+	border-top: 1px solid #ccc;
+	margin: 1rem 0;
 }

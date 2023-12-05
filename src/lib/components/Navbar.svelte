@@ -73,7 +73,7 @@
 		align-items: stretch;
 		background-color: #fff;
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-		border-radius: 10px;
+		border-radius: var(--radius);
 		color: #000;
 		height: 50px;
 		padding-right: 1rem;

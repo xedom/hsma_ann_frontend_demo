@@ -117,7 +117,7 @@
 		aspect-ratio: 1/1;
 		object-fit: cover;
 		user-select: none;
-		border-radius: 10px;
+		border-radius: var(--radius);
 	}
 
 	.product .left button {
@@ -141,6 +141,6 @@
 		aspect-ratio: 1/1;
 		object-fit: cover;
 		user-select: none;
-		border-radius: 10px;
+		border-radius: var(--radius);
 	}
 </style>

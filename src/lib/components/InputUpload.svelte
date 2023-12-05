@@ -98,13 +98,13 @@
 
 	button {
 		border: none;
-		border-radius: 5px;
+		border-radius: var(--radius);
 		padding: 0.25rem 0.5rem;
 		box-shadow: 0 0 0.25rem #00000055;
 	}
 
 	.images {
-		border-radius: 5px;
+		border-radius: var(--radius);
 		border: dashed 0.15rem #b5b5b5;
 		max-width: 700px;
 		background-color: #e5e5e5;
@@ -120,7 +120,7 @@
 		position: relative;
 		width: 200px;
 		height: 200px;
-		border-radius: 5px;
+		border-radius: var(--radius);
 		box-shadow: 0 0 0.5rem #00000044;
 		overflow: hidden;
 	}
