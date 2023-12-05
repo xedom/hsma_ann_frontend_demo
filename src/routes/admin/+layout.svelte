@@ -47,5 +47,6 @@
 		padding: 10px;
 		border-radius: 10px;
 		background-color: #fff;
+		overflow-y: auto;
 	}
 </style>

@@ -19,7 +19,7 @@ export type ProductListItem = {
 	name: string;
 	price: number;
 	rating: number;
-	image: string;
+	images: string[];
 };
 
 export type CartProduct = {

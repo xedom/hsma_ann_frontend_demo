@@ -5,6 +5,7 @@
 	import { writable, type Writable } from 'svelte/store';
 	import ProductRow from '$lib/components/ProductRow.svelte';
 	import ProductListItemShort from '$lib/components/ProductListItemShort.svelte';
+	import Table from '$lib/components/Table.svelte';
 
 	const products: Writable<ProductListItem[] | undefined> = writable(undefined);
 
@@ -27,6 +28,8 @@
 	<button>Add product</button>
 	<button>Delete</button>
 </div>
+
+<Table />
 
 <div class="container">
 	{#if $products}
