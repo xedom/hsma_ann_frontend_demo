@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { apiCreateProduct } from '$lib/api';
+	import { apiCreateProduct } from '$lib/api/products';
 	import ProfilePic from '$lib/components/ProfilePic.svelte';
 	import { addToast } from '$lib/components/Toast.svelte';
 

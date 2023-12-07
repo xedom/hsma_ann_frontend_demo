@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { apiGetLoggedUser } from '$lib/api';
+	import { apiGetLoggedUser } from '$lib/api/users';
 	import { onMount } from 'svelte';
 	import { addToast, ToastStatus } from './Toast.svelte';
 	import { user } from '$lib/stores/users';
@@ -76,7 +76,7 @@
 		border-radius: var(--radius);
 		color: #000;
 		height: 50px;
-		padding-right: 1rem;
+		padding: 0 1rem;
 	}
 
 	nav a {
@@ -94,7 +94,7 @@
 	.left {
 		flex: 1;
 		display: flex;
-		justify-content: center;
+		justify-content: flex-start;
 		align-items: center;
 		gap: 2rem;
 	}

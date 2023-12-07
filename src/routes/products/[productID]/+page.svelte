@@ -4,8 +4,9 @@
 	import { env } from '$env/dynamic/public';
 	import { parseMoney } from '$lib/utils/parser';
 	import Rating from '$lib/components/Rating.svelte';
-	import { apiAddProductToCart, apiGetProduct } from '$lib/api';
 	import { ToastStatus, addToast } from '$lib/components/Toast.svelte';
+	import { apiAddProductToCart } from '$lib/api/cart';
+	import { apiGetProduct } from '$lib/api/products';
 
 	const productID = $page.params.productID;
 	// const productID = $page.url.searchParams.get('id');

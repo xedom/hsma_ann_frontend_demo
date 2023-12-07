@@ -38,3 +38,5 @@ export type Order = {
 	total: number;
 	items: CartProduct[];
 };
+
+export type UserRole = 'user' | 'vendor' | 'admin';

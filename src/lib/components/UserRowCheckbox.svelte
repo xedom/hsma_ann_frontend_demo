@@ -1,7 +1,16 @@
 <script lang="ts">
 	import type { User } from '$lib/types';
+	import { createEventDispatcher } from 'svelte';
 
+	interface $$Events {
+		add: CustomEvent<User>;
+		remove: CustomEvent<User>;
+	}
+
+	const dispatch = createEventDispatcher();
 	let isSelecting = false;
+
+	$: isSelecting ? dispatch('add', user) : dispatch('remove', user);
 
 	export let user: User;
 </script>

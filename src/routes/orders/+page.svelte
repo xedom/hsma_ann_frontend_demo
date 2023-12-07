@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { apiGetOrders, apiGetProduct } from '$lib/api';
+	import { apiGetOrders } from '$lib/api/orders';
+	import { apiGetProduct } from '$lib/api/products';
 	import ProductListItemShort from '$lib/components/ProductListItemShort.svelte';
 	import type { Order } from '$lib/types';
 	import { parseDate, parseMoney } from '$lib/utils/parser';

@@ -2,9 +2,9 @@
 	import ProductCard from '$lib/components/ProductCard.svelte';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { apiGetUser } from '$lib/api';
 	import type { User } from '$lib/types';
 	import { writable, type Writable } from 'svelte/store';
+	import { apiGetUser } from '$lib/api/users';
 
 	const username = $page.params.username;
 	const currentUser: Writable<User | undefined> = writable(undefined);

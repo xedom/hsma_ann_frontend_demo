@@ -4,10 +4,10 @@
 		apiCheckoutCart,
 		apiClearCart,
 		apiGetCart,
-		apiGetProduct,
 		apiRemoveItemFromCart,
 		apiUpdateItemInCart
-	} from '$lib/api';
+	} from '$lib/api/cart';
+	import { apiGetProduct } from '$lib/api/products';
 	import ProductListItem from '$lib/components/ProductListItem.svelte';
 	import { ToastStatus, addToast } from '$lib/components/Toast.svelte';
 	import { parseMoney } from '$lib/utils/parser';

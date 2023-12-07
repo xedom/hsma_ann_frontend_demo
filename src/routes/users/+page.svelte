@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { apiGetUsers } from '$lib/api';
+	import { apiGetUsers } from '$lib/api/users';
 	import type { User } from '$lib/types';
 	import { writable, type Writable } from 'svelte/store';
 
@@ -36,11 +36,11 @@
 
 <style>
 	.container {
-		width: 1000px;
+		max-width: 1000px;
 		margin: 0 auto;
 		display: flex;
 		flex-direction: row;
-		justify-content: flex-start;
+		justify-content: center;
 		align-items: flex-start;
 		flex-wrap: wrap;
 		gap: 20px;

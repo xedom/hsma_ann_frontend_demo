@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { apiGetProducts } from '$lib/api';
+	import { apiGetProducts } from '$lib/api/products';
 	import type { ProductListItem } from '$lib/types';
 	import { writable, type Writable } from 'svelte/store';
 	import ProductRow from '$lib/components/ProductRow.svelte';

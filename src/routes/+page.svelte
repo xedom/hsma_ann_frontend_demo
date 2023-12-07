@@ -2,7 +2,7 @@
 	import ProductCard from '$lib/components/ProductCard.svelte';
 	import { onMount } from 'svelte';
 	import { derived, writable, type Writable } from 'svelte/store';
-	import { apiGetProducts } from '$lib/api';
+	import { apiGetProducts } from '$lib/api/products';
 	import type { Product } from '$lib/types';
 
 	const products: Writable<Product[]> = writable([]);

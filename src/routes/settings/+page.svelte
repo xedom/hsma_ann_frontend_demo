@@ -6,7 +6,7 @@
 	import ProfilePic from '$lib/components/ProfilePic.svelte';
 	import { ToastStatus, addToast } from '$lib/components/Toast.svelte';
 	import { onMount } from 'svelte';
-	import { apiGetLoggedUser } from '$lib/api';
+	import { apiGetLoggedUser } from '$lib/api/users';
 
 	let picImage = '';
 	const formActionUrl = `${env.PUBLIC_API_URL}/users/settings`;
