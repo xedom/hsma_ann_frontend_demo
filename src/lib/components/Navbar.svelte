@@ -47,8 +47,8 @@
 		{/each}
 	</div>
 	<div class="right">
-		<!-- {#if isUserLoggedIn && $user?.role === 'admin'} -->
-		{#if isUserLoggedIn}
+		{#if isUserLoggedIn && $user?.role === 'admin'}
+			<!-- {#if isUserLoggedIn} -->
 			<a href="/admin">admin</a>
 		{/if}
 
