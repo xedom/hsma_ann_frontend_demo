@@ -34,6 +34,7 @@
 				if (!selectedUsers.includes(user.id)) return user;
 				return { ...user, role };
 			});
+			selectedUsers = [];
 		} catch (error) {
 			addToast({
 				description: 'Failed to change users role',
@@ -56,6 +57,7 @@
 
 			if (!$users) return;
 			$users = $users.filter((user) => !selectedUsers.includes(user.id));
+			selectedUsers = [];
 		} catch (error) {
 			addToast({
 				description: 'Failed to delete users',
