@@ -2,6 +2,8 @@
 	import { env } from '$env/dynamic/public';
 
 	const actionUrl = `${env.PUBLIC_API_URL}/auth/login`;
+
+	const githubUrl = `${env.PUBLIC_API_URL}/auth/github`;
 </script>
 
 <div class="container">
@@ -22,6 +24,10 @@
 			<button type="submit">login</button>
 		</div>
 	</form>
+
+	<div class="social">
+		<a href={githubUrl}><img src="/icons/github-mark.svg" alt="github" /></a>
+	</div>
 </div>
 
 <style>
@@ -31,6 +37,17 @@
 		align-items: stretch;
 		justify-content: center;
 		gap: 1rem;
+	}
+
+	.social {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+	}
+
+	.social img {
+		width: 40px;
+		height: 40px;
 	}
 
 	form {
