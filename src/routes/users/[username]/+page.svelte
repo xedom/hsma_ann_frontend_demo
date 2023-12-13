@@ -21,10 +21,7 @@
 
 	onMount(async () => {
 		const users = await apiGetUser(username as string);
-		$currentUser = {
-			...users[0],
-			profilePic: `data:image/jpeg;base64,${users[0].profilePic}`
-		};
+		$currentUser = { ...users[0] };
 	});
 </script>
 

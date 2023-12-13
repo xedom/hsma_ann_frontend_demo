@@ -19,7 +19,7 @@
 	onMount(async () => {
 		try {
 			const { profilePic, ...rest } = await apiGetLoggedUser();
-			const pic = profilePic ? `data:image/jpeg;base64,${profilePic}` : '/images/rect.png';
+			const pic = profilePic || '/images/rect.png';
 			$user = { ...rest, profilePic: pic };
 		} catch (e) {
 			$user = undefined;

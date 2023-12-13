@@ -15,7 +15,7 @@
 
 		for (let product of fetchedProducts) {
 			const { image } = product;
-			product.image = image ? `data:image/jpeg;base64,${image}` : '/images/rect.png';
+			product.image = image || '/images/rect.png';
 		}
 
 		$products = fetchedProducts;

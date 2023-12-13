@@ -72,7 +72,7 @@
 
 			user.id = user._id;
 			delete user._id;
-			user.profilePic = profilePic ? `data:image/jpeg;base64,${profilePic}` : '/images/rect.png';
+			user.profilePic = profilePic || '/images/rect.png';
 		}
 
 		$users = fetchedUsers;

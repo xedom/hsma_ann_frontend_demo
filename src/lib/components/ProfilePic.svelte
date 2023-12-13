@@ -57,7 +57,7 @@
 		<img src={file.src} alt="product" />
 	{:else if image}
 		<div class="empty">UPLOAD</div>
-		<img src={`data:image/png;base64,${image}`} alt="product" />
+		<img src={image} alt="product" />
 	{:else}
 		<div class="empty">UPLOAD</div>
 	{/if}

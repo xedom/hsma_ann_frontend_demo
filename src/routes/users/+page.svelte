@@ -11,7 +11,8 @@
 
 		for (let user of fetchedUsers) {
 			const { profilePic } = user;
-			user.profilePic = profilePic ? `data:image/jpeg;base64,${profilePic}` : '/images/rect.png';
+			// user.profilePic = profilePic ? `data:image/jpeg;base64,${profilePic}` : '/images/rect.png';
+			user.profilePic = profilePic || '/images/rect.png';
 		}
 
 		$users = fetchedUsers;

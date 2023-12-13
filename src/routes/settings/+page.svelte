@@ -31,7 +31,7 @@
 			console.log('res', res);
 			if (res.statusCode === 200) {
 				addToast({ description: res.message, status: ToastStatus.SUCCESS });
-				picImage = `data:image/jpeg;base64,${res.image}`;
+				picImage = res.image;
 			} else {
 				addToast({ description: res.message, status: ToastStatus.ERROR });
 			}
