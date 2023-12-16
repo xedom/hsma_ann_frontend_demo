@@ -9,7 +9,8 @@
 		<h1>register</h1>
 		<div class="field">
 			<label for="username">username: </label>
-			<input type="text" id="username" name="username" placeholder="username" /><br />
+			<!-- svelte-ignore a11y-autofocus -->
+			<input type="text" id="username" name="username" placeholder="username" autofocus /><br />
 		</div>
 		<div class="field">
 			<label for="email">email: </label>

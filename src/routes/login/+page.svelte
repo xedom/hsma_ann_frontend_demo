@@ -10,7 +10,8 @@
 	<form action={actionUrl} method="post">
 		<h1>login</h1>
 		<div class="field">
-			<label for="username">username: </label>
+			<!-- svelte-ignore a11y-autofocus -->
+			<label for="username" autofocus>username: </label>
 			<input type="text" id="username" name="username" placeholder="username" /><br />
 		</div>
 		<div class="field">

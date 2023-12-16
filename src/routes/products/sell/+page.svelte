@@ -1,29 +1,35 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { apiCreateProduct } from '$lib/api/products';
+	import { env } from '$env/dynamic/public';
+	import Footer from '$lib/components/Footer.svelte';
 	import ProfilePic from '$lib/components/ProfilePic.svelte';
-	import { addToast } from '$lib/components/Toast.svelte';
+	import { ToastStatus, addToast } from '$lib/components/Toast.svelte';
+
+	const formActionUrl = `${env.PUBLIC_API_URL}/products`;
 
 	let name = '';
 	let price = 0;
+	let stock = 0;
+	let description = '';
 
 	async function createProduct(event: Event) {
 		event.preventDefault();
 
 		try {
-			const res = await apiCreateProduct({ name, price });
+			const res = await apiCreateProduct({ name, price, stock, description });
 
-			addToast({ description: 'Product created successfully' });
-			goto('/product');
-		} catch (error) {
-			if (error instanceof Error) addToast({ description: error.message });
+			addToast({ description: 'Product created successfully', status: ToastStatus.SUCCESS });
+			// goto('/products');
+		} catch (e) {
+			if (e instanceof Error) addToast({ description: e.message, status: ToastStatus.ERROR });
 		}
 	}
 </script>
 
 <h1>Create new product</h1>
 
-<form on:submit|preventDefault={createProduct}>
+<form action={formActionUrl} method="POST" enctype="multipart/form-data">
 	<div class="left">
 		<ProfilePic
 			name="image"
@@ -36,12 +42,19 @@
 	<div class="right">
 		<div class="field">
 			<label for="name">Name:</label>
-			<input type="text" name="name" id="name" bind:value={name} />
+			<input type="text" name="name" id="name" />
 		</div>
 
-		<div class="field">
-			<label for="price">Price:</label>
-			<input type="text" pattern="[0-9]*" name="price" id="price" bind:value={price} />
+		<div class="row">
+			<div class="field">
+				<label for="price">Price (€):</label>
+				<input type="text" pattern="[0-9]*" name="price" id="price" />
+			</div>
+
+			<div class="field">
+				<label for="stock">Stock:</label>
+				<input type="text" pattern="[0-9]*" name="stock" id="stock" />
+			</div>
 		</div>
 
 		<div class="field">
@@ -75,6 +88,14 @@
 		gap: 2rem;
 		border-radius: var(--radius);
 		background-color: #d5d5d5;
+	}
+
+	form .row {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: stretch;
+		gap: 10px;
 	}
 
 	form .left {

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { apiGetLoggedUser } from '$lib/api/users';
 	import { onMount } from 'svelte';
-	import { addToast, ToastStatus } from './Toast.svelte';
 	import { user } from '$lib/stores/users';
 
 	const links = [
@@ -41,6 +40,7 @@
 
 <nav>
 	<div class="left">
+		<a id="icon" href="/"><img src="/icon.png" alt="icon" /></a>
 		{#each links as link}
 			{#if link.public || isUserLoggedIn}
 				<a href={link.href}>{link.name}</a>
@@ -53,6 +53,10 @@
 			<a href="/admin">admin</a>
 		{/if}
 
+		{#if isUserLoggedIn && $user?.role === 'vendor'}
+			<a href="/products/sell">sell</a>
+		{/if}
+
 		{#if !isUserLoggedIn}
 			<a href="/login">login</a>
 			<a href="/register">register</a>
@@ -61,7 +65,6 @@
 			<a id="username" href={`/users/${$user?.username}`}>
 				<span>{$user?.username}</span>
 				<img src={$user?.profilePic} alt="User Profile" class="userpicture" />
-				<!-- <img alt="User Profile" class="userpicture" /> -->
 			</a>
 		{/if}
 	</div>
@@ -78,6 +81,16 @@
 		color: #000;
 		height: 50px;
 		padding: 0 1rem;
+	}
+	nav #icon {
+		width: 2rem;
+		height: 2rem;
+	}
+
+	nav #icon img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 
 	nav a {
