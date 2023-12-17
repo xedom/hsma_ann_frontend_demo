@@ -10,7 +10,11 @@ export const apiGetUsers = async () => {
 };
 
 export const apiGetUser = async (username: string) => {
-	return await api_get(`/users/${username}`);
+	return (await api_get(`/users/${username}`))[0];
+};
+
+export const apiGetUserByID = async (userID: string) => {
+	return (await api_get(`/users/id/${userID}`));
 };
 
 export const apiDelecteUser = async (userID: string) => {

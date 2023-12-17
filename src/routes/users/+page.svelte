@@ -10,9 +10,9 @@
 		const fetchedUsers = await apiGetUsers();
 
 		for (let user of fetchedUsers) {
-			const { profilePic } = user;
-			// user.profilePic = profilePic ? `data:image/jpeg;base64,${profilePic}` : '/images/rect.png';
-			user.profilePic = profilePic || '/images/rect.png';
+			const { picture } = user;
+			// user.picture = picture ? `data:image/jpeg;base64,${picture}` : '/images/rect.png';
+			user.picture = picture || '/images/rect.png';
 		}
 
 		$users = fetchedUsers;
@@ -23,10 +23,10 @@
 	{#if $users}
 		{#each $users as user}
 			<a class="userCard" href={`/users/${user.username}`}>
-				<img src={user.profilePic} alt="User" />
+				<img src={user.picture} alt="User" />
 				<div class="username">
 					<h2>{user.username}</h2>
-					<p>{user.email}</p>
+					<p>{user.role}</p>
 				</div>
 			</a>
 		{/each}
@@ -37,7 +37,7 @@
 
 <style>
 	.container {
-		max-width: 1000px;
+		max-width: 800px;
 		margin: 0 auto;
 		display: flex;
 		flex-direction: row;
@@ -58,8 +58,8 @@
 	}
 
 	.userCard img {
-		width: 160px;
-		height: 160px;
+		width: 120px;
+		height: 120px;
 		object-fit: cover;
 		border-radius: 50%;
 		box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);

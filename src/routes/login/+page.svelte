@@ -4,6 +4,7 @@
 	const actionUrl = `${env.PUBLIC_API_URL}/auth/login`;
 
 	const githubUrl = `${env.PUBLIC_API_URL}/auth/github`;
+	const auth0Url = `${env.PUBLIC_API_URL}/auth/auth0`;
 </script>
 
 <div class="container">
@@ -28,6 +29,7 @@
 
 	<div class="social">
 		<a href={githubUrl}><img src="/icons/github-mark.svg" alt="github" /></a>
+		<a href={auth0Url}><img src="/icons/auth0.svg" alt="auth0" /></a>
 	</div>
 </div>
 
@@ -47,8 +49,8 @@
 	}
 
 	.social img {
-		width: 40px;
-		height: 40px;
+		width: 30px;
+		height: 30px;
 	}
 
 	form {

@@ -17,9 +17,9 @@
 
 	onMount(async () => {
 		try {
-			const { profilePic, ...rest } = await apiGetLoggedUser();
-			const pic = profilePic || '/images/rect.png';
-			$user = { ...rest, profilePic: pic };
+			const { picture, ...rest } = await apiGetLoggedUser();
+			const pic = picture || '/images/rect.png';
+			$user = { ...rest, picture: pic };
 		} catch (e) {
 			$user = undefined;
 			// if (e instanceof Error)
@@ -64,7 +64,7 @@
 			<a href="/logout">logout</a>
 			<a id="username" href={`/users/${$user?.username}`}>
 				<span>{$user?.username}</span>
-				<img src={$user?.profilePic} alt="User Profile" class="userpicture" />
+				<img src={$user?.picture} alt="User Profile" class="userpicture" />
 			</a>
 		{/if}
 	</div>

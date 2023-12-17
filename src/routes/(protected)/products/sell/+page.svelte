@@ -5,9 +5,12 @@
 	import Footer from '$lib/components/Footer.svelte';
 	import ProfilePic from '$lib/components/ProfilePic.svelte';
 	import { ToastStatus, addToast } from '$lib/components/Toast.svelte';
+	import { onMount } from 'svelte';
+	import { apiGetLoggedUser } from '$lib/api/users';
 
 	const formActionUrl = `${env.PUBLIC_API_URL}/products`;
 
+	// let userID: string | undefined = undefined;
 	let name = '';
 	let price = 0;
 	let stock = 0;
@@ -25,6 +28,11 @@
 			if (e instanceof Error) addToast({ description: e.message, status: ToastStatus.ERROR });
 		}
 	}
+
+	// onMount(async () => {
+	// 	const res = await apiGetLoggedUser();
+	// 	userID = res._id;
+	// });
 </script>
 
 <h1>Create new product</h1>
@@ -40,6 +48,8 @@
 	</div>
 
 	<div class="right">
+		<!-- <input type="hidden" name="userID" value={userID} /> -->
+
 		<div class="field">
 			<label for="name">Name:</label>
 			<input type="text" name="name" id="name" />
@@ -48,7 +58,7 @@
 		<div class="row">
 			<div class="field">
 				<label for="price">Price (€):</label>
-				<input type="text" pattern="[0-9]*" name="price" id="price" />
+				<input type="text" pattern="[0-9]*(\.[0-9]+)?" name="price" id="price" />
 			</div>
 
 			<div class="field">

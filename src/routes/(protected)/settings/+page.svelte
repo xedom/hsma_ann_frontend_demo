@@ -6,16 +6,29 @@
 	import ProfilePic from '$lib/components/ProfilePic.svelte';
 	import { ToastStatus, addToast } from '$lib/components/Toast.svelte';
 	import { onMount } from 'svelte';
-	import { apiGetLoggedUser } from '$lib/api/users';
+	import { apiDelecteUser, apiGetLoggedUser } from '$lib/api/users';
+	import { goto } from '$app/navigation';
 
 	let picImage = '';
 	const formActionUrl = `${env.PUBLIC_API_URL}/users/settings`;
 	let userInfo:
-		| { username: string; profilePic: string; email: string; address: string }
+		| { _id: string; username: string; picture: string; email: string; address: string }
 		| undefined;
 
 	const handlePicError = (e: CustomEvent<{ error: string }>) => {
 		addToast({ description: e.detail.error, status: ToastStatus.ERROR });
+	};
+
+	const handleDeleteAccount = async () => {
+		if (!userInfo) return;
+		try {
+			await apiDelecteUser(userInfo._id);
+			addToast({ description: 'User deleted successfully', status: ToastStatus.SUCCESS });
+			goto('/login');
+		} catch (e) {
+			console.log('e', e);
+			if (e instanceof Error) addToast({ description: e.message, status: ToastStatus.ERROR });
+		}
 	};
 
 	const resHandle: SubmitFunction = async (input) => {
@@ -46,10 +59,11 @@
 			const data = await apiGetLoggedUser();
 			console.log('data', data);
 			userInfo = {
+				_id: data._id,
 				username: data.username,
-				profilePic: data.profilePic,
+				picture: data.picture,
 				email: data.email,
-				address: `${data.address.street}, ${data.address.city}, ${data.address.state}, ${data.address.country}`
+				address: data.address
 			};
 		} catch (e) {
 			if (e instanceof Error) {
@@ -62,7 +76,7 @@
 <h1>Settings</h1>
 <form action={formActionUrl} method="POST" enctype="multipart/form-data">
 	<div class="left">
-		<ProfilePic name="image" image={userInfo?.profilePic} on:error={handlePicError} />
+		<ProfilePic name="image" image={userInfo?.picture} on:error={handlePicError} />
 		<!-- <h5>uploaded image preview:</h5>
 			<img src={picImage} alt="" /> -->
 	</div>
@@ -98,7 +112,10 @@
 			<input type="text" name="address" id="address" placeholder={userInfo?.address ?? 'address'} />
 		</div>
 
-		<button type="submit">Save</button>
+		<div class="buttons">
+			<button type="button" class="danger" on:click={handleDeleteAccount}>Delete Account</button>
+			<button type="submit">Save</button>
+		</div>
 	</div>
 </form>
 
@@ -144,5 +161,13 @@
 		align-items: stretch;
 		justify-content: center;
 		gap: 0.25rem;
+	}
+
+	form .buttons {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: flex-end;
+		gap: 0.5rem;
 	}
 </style>

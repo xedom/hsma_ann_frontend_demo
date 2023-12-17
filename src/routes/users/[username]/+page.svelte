@@ -2,47 +2,40 @@
 	import ProductCard from '$lib/components/ProductCard.svelte';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import type { User } from '$lib/types';
+	import type { Product, User } from '$lib/types';
 	import { writable, type Writable } from 'svelte/store';
 	import { apiGetUser } from '$lib/api/users';
+	import { apiGetProductByUser } from '$lib/api/products';
 
 	const username = $page.params.username;
-	const currentUser: Writable<User | undefined> = writable(undefined);
+	let currentUser: User | undefined = undefined;
 
-	let userProducts = [
-		{ id: '1', name: 'Product 2', price: 10, image: 'https://picsum.photos/100' },
-		{ id: '2', name: 'Product 2', price: 10, image: 'https://picsum.photos/200' },
-		{ id: '3', name: 'Product 2', price: 10, image: 'https://picsum.photos/300' },
-		{ id: '4', name: 'Product 2', price: 10, image: 'https://picsum.photos/400' },
-		{ id: '5', name: 'Product 2', price: 10, image: 'https://picsum.photos/500' },
-		{ id: '6', name: 'Product 2', price: 10, image: 'https://picsum.photos/600' },
-		{ id: '7', name: 'Product 2', price: 10, image: 'https://picsum.photos/250' }
-	];
+	let userProducts: Product[] = [];
 
 	onMount(async () => {
-		const users = await apiGetUser(username as string);
-		$currentUser = { ...users[0] };
+		const user = await apiGetUser(username as string);
+		currentUser = user;
+		const products = await apiGetProductByUser(user._id);
+		userProducts = products as Product[];
 	});
 </script>
 
 <div class="container">
-	<div id="profilePic">
-		<img src={$currentUser?.profilePic} alt="User" class="userpictureBig" />
+	<div id="picture">
+		<img src={currentUser?.picture} alt="User" class="userpictureBig" />
 	</div>
 	<div class="right">
 		<div class="username">
-			<h1>{$currentUser?.username}</h1>
-			<p>{$currentUser?.email}</p>
-		</div>
-		<div class="description">
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-			labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-			laboris nisi ut aliquip ex
+			<h1>{currentUser?.username}</h1>
+			<p>{currentUser?.role}</p>
 		</div>
 		<h3>My Products</h3>
 		<div class="products">
+			{#if userProducts.length === 0}
+				<p>No products</p>
+			{/if}
 			{#each userProducts as product}
-				<ProductCard {...product} rating={3} />
+				<ProductCard {...product} image={product.images[0]} id={product._id} />
 			{/each}
 		</div>
 	</div>
@@ -74,6 +67,8 @@
 		width: 300px;
 		border-radius: 50%;
 		object-fit: cover;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+		margin-top: 0.5rem;
 	}
 
 	.right {

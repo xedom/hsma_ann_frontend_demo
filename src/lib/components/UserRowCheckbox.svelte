@@ -25,7 +25,7 @@
 		/>
 		<label for={`user-${user.username}`}>
 			<div class="img">
-				<img src={user.profilePic} alt="User" />
+				<img src={user.picture} alt="User" />
 				{#if isSelecting}
 					<div class="white" />
 					<img class="done" src="/icons/done.svg" alt="Done" />

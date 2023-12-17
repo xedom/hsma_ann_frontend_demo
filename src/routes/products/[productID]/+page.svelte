@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
-	import { env } from '$env/dynamic/public';
 	import { parseMoney } from '$lib/utils/parser';
 	import Rating from '$lib/components/Rating.svelte';
 	import { ToastStatus, addToast } from '$lib/components/Toast.svelte';
 	import { apiAddProductToCart } from '$lib/api/cart';
 	import { apiGetProduct } from '$lib/api/products';
+	import { apiGetUserByID } from '$lib/api/users';
+	import UserChip from '$lib/components/UserChip.svelte';
 
 	const productID = $page.params.productID;
 	// const productID = $page.url.searchParams.get('id');
@@ -25,6 +26,8 @@
 		rating: 0
 	};
 
+	let owner: { username: string; picture: string } | undefined;
+
 	const handleAddToCart = async () => {
 		try {
 			await apiAddProductToCart(productID, quantity);
@@ -41,6 +44,9 @@
 		if (!productID) return;
 		try {
 			const data = await apiGetProduct(productID.toString());
+			const { userID } = data;
+			if (userID) owner = await apiGetUserByID(userID);
+
 			bigImage = data.images[0];
 			product = data;
 		} catch (e) {
@@ -65,6 +71,9 @@
 		</div>
 		<div class="right">
 			<h1 class="title">{product.name.toUpperCase()}</h1>
+			{#if owner}
+				<div class="by"><b>By:</b> <UserChip {...owner} /></div>
+			{/if}
 			<div class="price"><b>Price:</b> {parseMoney(product.price)}</div>
 			<div class="rating"><b>Rating:</b> <Rating rating={product.rating} /></div>
 			<div class="button">
@@ -143,5 +152,10 @@
 		object-fit: cover;
 		user-select: none;
 		border-radius: var(--radius);
+	}
+
+	.by {
+		gap: 10px;
+		display: flex;
 	}
 </style>

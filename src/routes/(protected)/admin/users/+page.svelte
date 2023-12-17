@@ -70,11 +70,11 @@
 		const fetchedUsers = await apiGetUsers();
 
 		for (let user of fetchedUsers) {
-			const { profilePic } = user;
+			const { picture } = user;
 
 			user.id = user._id;
 			delete user._id;
-			user.profilePic = profilePic || '/images/rect.png';
+			user.picture = picture || '/images/rect.png';
 		}
 
 		$users = fetchedUsers;

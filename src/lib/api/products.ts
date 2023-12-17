@@ -11,3 +11,7 @@ export const apiGetProduct = async (id: string) => {
 export const apiCreateProduct = async (data: any) => {
 	return await api_post('/products', data);
 };
+
+export const apiGetProductByUser = async (userID: string) => {
+	return await api_get(`/products/user/${userID}`);
+}
