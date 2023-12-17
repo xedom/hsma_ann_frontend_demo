@@ -157,5 +157,6 @@
 	.by {
 		gap: 10px;
 		display: flex;
+		align-items: center;
 	}
 </style>
