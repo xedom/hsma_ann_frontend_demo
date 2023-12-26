@@ -1,24 +1,23 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { apiGetProducts } from '$lib/api/products';
-	import type { ProductListItem } from '$lib/types';
+	import type { ProductListItem, ProductTableRow } from '$lib/types';
 	import { writable, type Writable } from 'svelte/store';
-	import ProductRow from '$lib/components/ProductRow.svelte';
-	import ProductListItemShort from '$lib/components/ProductListItemShort.svelte';
 	import Table from '$lib/components/Table.svelte';
 	import { parseMoney } from '$lib/utils/parser';
 
-	const products: Writable<ProductListItem[] | undefined> = writable(undefined);
+	let products: Writable<ProductTableRow[] | undefined> = writable(undefined);
 
 	onMount(async () => {
-		const fetchedProducts = await apiGetProducts();
+		const fetchedProducts = (await apiGetProducts()) satisfies ProductListItem[];
 
-		for (let product of fetchedProducts) {
-			const { image } = product;
-			product.image = image || '/images/rect.png';
-		}
+		const mappedProducts = fetchedProducts.map(({ name, price, preview }) => ({
+			name,
+			price: parseMoney(price),
+			image: preview || '/images/rect.png'
+		}));
 
-		$products = fetchedProducts;
+		$products = mappedProducts satisfies ProductTableRow[];
 	});
 </script>
 
@@ -34,20 +33,9 @@
 <div class="container">
 	<br />
 	{#if $products}
-		<Table
-			data={$products.map(({ name, price, images }) => ({
-				name,
-				price: parseMoney(price),
-				image: images[0]
-			}))}
-		/>
+		<Table data={$products} />
 		<!-- {#each $products as product}
-			<ProductListItemShort
-				id={product._id}
-				name={product.name}
-				price={product.price}
-				image={product.images[0]}
-			/>
+			<ProductListItemShort {...product} />
 		{/each} -->
 	{/if}
 </div>

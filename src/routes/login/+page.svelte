@@ -19,9 +19,9 @@
 			<label for="password">password: </label>
 			<input type="password" id="password" name="password" placeholder="password" /><br />
 		</div>
-		<div class="link">
+		<!-- <div class="link">
 			<a href="/reset-password">reset your password</a>
-		</div>
+		</div> -->
 		<div>
 			<button type="submit">login</button>
 		</div>

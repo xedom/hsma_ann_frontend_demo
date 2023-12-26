@@ -3,7 +3,6 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import type { Product, User } from '$lib/types';
-	import { writable, type Writable } from 'svelte/store';
 	import { apiGetUser } from '$lib/api/users';
 	import { apiGetProductByUser } from '$lib/api/products';
 
@@ -35,7 +34,7 @@
 				<p>No products</p>
 			{/if}
 			{#each userProducts as product}
-				<ProductCard {...product} image={product.images[0]} id={product._id} />
+				<ProductCard {...product} preview={product.images[0]} id={product.id} />
 			{/each}
 		</div>
 	</div>

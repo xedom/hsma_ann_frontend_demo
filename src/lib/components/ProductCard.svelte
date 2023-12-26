@@ -6,12 +6,12 @@
 	export let name: string = '';
 	export let price: number = 0;
 	export let rating: number = 0;
-	export let image: string | undefined = undefined;
+	export let preview: string | undefined = undefined;
 </script>
 
 <a class="card" href="/products/{id}">
-	{#if image}
-		<img src={image} alt="produktbild" draggable={false} />
+	{#if preview}
+		<img src={preview} alt="produktbild" draggable={false} />
 	{:else}
 		<div class="placeholder">Bild nicht verfügbar</div>
 	{/if}

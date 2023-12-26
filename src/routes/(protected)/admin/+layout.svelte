@@ -1,14 +1,29 @@
-<div class="container">
-	<div class="sidebar">
-		<a href="/admin">Dashboard</a>
-		<a href="/admin/users">Users</a>
-		<a href="/admin/products">Products</a>
-	</div>
+<script lang="ts">
+	import { goto } from '$app/navigation';
+	import type { LayoutData } from './$types';
 
-	<div class="content">
-		<slot />
+	export let data: LayoutData;
+	const { user } = data;
+	const isAdmin = user?.role === 'admin';
+
+	if (!isAdmin) goto('/');
+</script>
+
+{#if isAdmin}
+	<div class="container">
+		<div class="sidebar">
+			<a href="/admin">Dashboard</a>
+			<a href="/admin/users">Users</a>
+			<a href="/admin/products">Products</a>
+		</div>
+
+		<div class="content">
+			<slot />
+		</div>
 	</div>
-</div>
+{:else}
+	<p>Admin protected route</p>
+{/if}
 
 <style>
 	.container {

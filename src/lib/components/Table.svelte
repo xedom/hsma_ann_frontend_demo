@@ -1,15 +1,7 @@
 <script lang="ts">
-	// const headers = ['Name', 'Price', 'Image'];
 	export let data: Record<string, string>[];
-	// const rows = [
-	// 	{ name: 'Product 1', price: '$10', images: 'image' },
-	// 	{ name: 'Product 2', price: '$20', images: 'image' },
-	// 	{ name: 'Product 3', price: '$30', images: 'image' },
-	// 	{ name: 'Product 4', price: '$40', images: 'image' },
-	// 	{ name: 'Product 5', price: '$50', images: 'image' }
-	// ];
 	const additionalActions = [
-		{ name: 'Edit', class: '', action: () => console.log('Edit') },
+		// { name: 'Edit', class: '', action: () => console.log('Edit') },
 		{ name: 'Delete', class: 'danger', action: () => console.log('Delete') }
 	];
 
@@ -92,6 +84,7 @@
 	tbody td.col-actions {
 		display: flex;
 		align-items: center;
+		justify-content: center;
 		gap: 5px;
 	}
 

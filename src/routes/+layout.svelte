@@ -2,7 +2,11 @@
 	import Footer from '$lib/components/Footer.svelte';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Toast from '$lib/components/Toast.svelte';
+	import type { LayoutData } from './$types';
 	import './globalstyle.css';
+
+	export let data: LayoutData;
+	const { user } = data;
 </script>
 
 <svelte:head>
@@ -12,7 +16,7 @@
 <Toast />
 
 <header>
-	<Navbar />
+	<Navbar {user} />
 </header>
 
 <main>

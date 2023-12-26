@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { apiGetLoggedUser } from '$lib/api/users';
-	import { onMount } from 'svelte';
-	import { user } from '$lib/stores/users';
+	import type { User } from '$lib/types';
 
 	const links = [
 		{ name: 'home', href: '/', public: true },
@@ -13,29 +11,9 @@
 		{ name: 'settings', href: '/settings', public: false }
 	];
 
-	$: isUserLoggedIn = $user !== undefined;
+	export let user: User | undefined = undefined;
 
-	onMount(async () => {
-		try {
-			const { picture, ...rest } = await apiGetLoggedUser();
-			const pic = picture || '/images/rect.png';
-			$user = { ...rest, picture: pic };
-		} catch (e) {
-			$user = undefined;
-			// if (e instanceof Error)
-			// 	return addToast({
-			// 	title: 'User error',
-			// 	description: e.message,
-			// 	status: ToastStatus.ERROR
-			// });
-
-			// addToast({
-			// 	title: 'User error',
-			// 	description: 'Generic error',
-			// 	status: ToastStatus.ERROR
-			// });
-		}
-	});
+	const isUserLoggedIn = user !== undefined;
 </script>
 
 <nav>
@@ -48,23 +26,22 @@
 		{/each}
 	</div>
 	<div class="right">
-		{#if isUserLoggedIn && $user?.role === 'admin'}
-			<!-- {#if isUserLoggedIn} -->
-			<a href="/admin">admin</a>
-		{/if}
-
-		{#if isUserLoggedIn && $user?.role === 'vendor'}
-			<a href="/products/sell">sell</a>
-		{/if}
-
-		{#if !isUserLoggedIn}
+		{#if user === undefined}
 			<a href="/login">login</a>
 			<a href="/register">register</a>
 		{:else}
+			{#if user.role === 'admin'}
+				<a href="/admin">admin</a>
+			{/if}
+
+			{#if user.role === 'vendor'}
+				<a href="/products/sell">sell</a>
+			{/if}
+
 			<a href="/logout">logout</a>
-			<a id="username" href={`/users/${$user?.username}`}>
-				<span>{$user?.username}</span>
-				<img src={$user?.picture} alt="User Profile" class="userpicture" />
+			<a id="username" href={`/users/${user.username}`}>
+				<span>{user.username}</span>
+				<img src={user.picture} alt="User Profile" class="userpicture" />
 			</a>
 		{/if}
 	</div>

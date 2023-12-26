@@ -1,12 +1,26 @@
-import type { UserRole } from "$lib/types";
-import { api_delete, api_get, api_post, api_put } from "./api";
+import type { FetchedUser, User, UserRole } from "$lib/types";
+import { api_delete, api_get, api_put } from "./api";
 
-export const apiGetLoggedUser = async () => {
-	return await api_get('/users/profile');
+export const apiGetLoggedUser = async (): Promise<User|undefined> => {
+	try {
+		const { _id: id, username, email, picture, role } = await api_get('/users/profile');
+		return { id, username, email, picture, role } satisfies User;
+	} catch {
+		return undefined;
+	}
 };
 
-export const apiGetUsers = async () => {
-	return await api_get('/users');
+export const apiGetUsers = async (): Promise<User[]> => {
+	try {
+		const users: FetchedUser[] = await api_get('/users');
+		const mappedUsers = users.map(
+			({ _id: id, username, email, picture, role }) => 
+			({ id, username, email, picture, role } satisfies User)
+		);
+		return mappedUsers satisfies User[];
+	} catch {
+		return [];
+	}
 };
 
 export const apiGetUser = async (username: string) => {

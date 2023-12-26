@@ -1,19 +1,15 @@
 <script lang="ts">
-	import { user } from '$lib/stores/users';
 	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
-	import { apiGetLoggedUser } from '$lib/api/users';
+	import type { LayoutData } from './$types';
 
-	onMount(async () => {
-		try {
-			const data = await apiGetLoggedUser();
-			$user = { ...data };
-		} catch (e) {
-			$user = undefined;
-		}
+	export let data: LayoutData;
+	const { user } = data;
 
-		if ($user === undefined) goto('/login');
-	});
+	if (user === undefined) goto('/login');
 </script>
 
-<slot />
+{#if user}
+	<slot />
+{:else}
+	<p>Protected route</p>
+{/if}

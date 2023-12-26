@@ -13,16 +13,16 @@
 	};
 
 	let files: FilesType[] = [
-		{ data: 'https://picsum.photos/id/63/1000' },
-		{ data: 'https://picsum.photos/id/96/1000' },
-		{ data: 'https://picsum.photos/id/111/1000' },
-		{ data: 'https://picsum.photos/id/250/1000' },
-		{ data: 'https://picsum.photos/id/435/1000' },
-		{ data: 'https://picsum.photos/id/486/1000' },
-		{ data: 'https://picsum.photos/id/655/1000' },
-		{ data: 'https://picsum.photos/id/912/1000' },
-		{ data: 'https://picsum.photos/id/48/1000' },
-		{ data: 'https://picsum.photos/id/23/1000' }
+		// { data: 'https://picsum.photos/id/63/1000' },
+		// { data: 'https://picsum.photos/id/96/1000' },
+		// { data: 'https://picsum.photos/id/111/1000' },
+		// { data: 'https://picsum.photos/id/250/1000' },
+		// { data: 'https://picsum.photos/id/435/1000' },
+		// { data: 'https://picsum.photos/id/486/1000' },
+		// { data: 'https://picsum.photos/id/655/1000' },
+		// { data: 'https://picsum.photos/id/912/1000' },
+		// { data: 'https://picsum.photos/id/48/1000' },
+		// { data: 'https://picsum.photos/id/23/1000' }
 	];
 
 	let multiple: boolean = true;
@@ -72,23 +72,23 @@
 	}
 </script>
 
-<input type="file" name="file" id="file" on:change={change} {multiple} bind:this={elem} />
+<input type="file" name="files" id="files" on:change={change} {multiple} bind:this={elem} />
 <div class="images">
+	<button type="button" class="image-box" on:click={click}>UPLOAD IMAGE</button>
 	{#each files as file, i}
 		<div class="image-box">
 			<div class="buttons">
 				{#if i == $previewIndex}
 					<button type="button" class="preview">PREVIEW</button>
 				{:else}
-					<button on:click={() => setPreview(i)}>SET PREVIEW</button>
+					<button type="button" on:click={() => setPreview(i)}>SET PREVIEW</button>
 				{/if}
 
-				<button class="remove" on:click={() => remove(i)}>REMOVE</button>
+				<button type="button" class="remove" on:click={() => remove(i)}>REMOVE</button>
 			</div>
 			<img src={file.data} alt="product" />
 		</div>
 	{/each}
-	<button class="image-box" on:click={click}>UPLOAD</button>
 </div>
 
 <style>
@@ -136,7 +136,7 @@
 	}
 
 	.preview {
-		background-color: #14ff7e;
+		background-color: #00c257;
 		cursor: default;
 	}
 
