@@ -1,12 +1,8 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import { apiCreateProduct } from '$lib/api/products';
 	import { env } from '$env/dynamic/public';
-	import Footer from '$lib/components/Footer.svelte';
 	import ProfilePic from '$lib/components/ProfilePic.svelte';
 	import { ToastStatus, addToast } from '$lib/components/Toast.svelte';
-	import { onMount } from 'svelte';
-	import { apiGetLoggedUser } from '$lib/api/users';
 
 	const formActionUrl = `${env.PUBLIC_API_URL}/products`;
 

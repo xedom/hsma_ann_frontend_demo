@@ -1,15 +1,10 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import { apiCreateProduct } from '$lib/api/products';
 	import { env } from '$env/dynamic/public';
-	import Footer from '$lib/components/Footer.svelte';
-	import ProfilePic from '$lib/components/ProfilePic.svelte';
 	import { ToastStatus, addToast } from '$lib/components/Toast.svelte';
-	import { onMount } from 'svelte';
-	import { apiGetLoggedUser } from '$lib/api/users';
 	import InputUpload from '$lib/components/InputUpload.svelte';
 
-	const formActionUrl = `${env.PUBLIC_API_URL}/products`;
+	const formActionUrl = `${env.PUBLIC_API_URL}/products/test`;
 
 	// let userID: string | undefined = undefined;
 	let name = '';
@@ -20,14 +15,14 @@
 	async function createProduct(event: Event) {
 		event.preventDefault();
 
-		try {
-			const res = await apiCreateProduct({ name, price, stock, description });
+		// try {
+		// 	const res = await apiCreateProduct({ name, price, stock, description });
 
-			addToast({ description: 'Product created successfully', status: ToastStatus.SUCCESS });
-			// goto('/products');
-		} catch (e) {
-			if (e instanceof Error) addToast({ description: e.message, status: ToastStatus.ERROR });
-		}
+		// 	addToast({ description: 'Product created successfully', status: ToastStatus.SUCCESS });
+		// 	// goto('/products');
+		// } catch (e) {
+		// 	if (e instanceof Error) addToast({ description: e.message, status: ToastStatus.ERROR });
+		// }
 	}
 
 	// onMount(async () => {

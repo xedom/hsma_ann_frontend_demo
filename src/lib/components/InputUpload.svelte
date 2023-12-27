@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { writable } from 'svelte/store';
 	import { ToastStatus, addToast } from './Toast.svelte';
 
-	let previewIndex = writable<number>(0);
+	let previewIndex: number = 0;
 
 	type FilesType = {
 		file?: File;
@@ -58,18 +57,21 @@
 		}
 	}
 
-	function setPreview(i: number) {
-		$previewIndex = i;
-	}
+	const setPreview = (i: number) => {
+		// previewIndex = i;
+		const previewFile = files[i];
+		const filesWithoutPreview = files.filter((_, index) => index !== i);
+		files = [previewFile, ...filesWithoutPreview];
+	};
 
-	function change(event: Event) {
+	const change = (event: Event) => {
 		const target = event.target as HTMLInputElement;
 		if (target?.files) parseFiles(target.files);
-	}
+	};
 
-	function remove(i: number) {
+	const remove = (i: number) => {
 		files = files.filter((_, index) => index !== i);
-	}
+	};
 </script>
 
 <input type="file" name="files" id="files" on:change={change} {multiple} bind:this={elem} />
@@ -78,7 +80,7 @@
 	{#each files as file, i}
 		<div class="image-box">
 			<div class="buttons">
-				{#if i == $previewIndex}
+				{#if i == previewIndex}
 					<button type="button" class="preview">PREVIEW</button>
 				{:else}
 					<button type="button" on:click={() => setPreview(i)}>SET PREVIEW</button>
@@ -123,6 +125,9 @@
 		border-radius: var(--radius);
 		box-shadow: 0 0 0.5rem #00000044;
 		overflow: hidden;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	.image-box .buttons {
@@ -141,8 +146,8 @@
 	}
 
 	.image-box img {
-		width: 100%;
-		height: 100%;
+		max-width: 100%;
+		max-height: 100%;
 		object-fit: cover;
 	}
 </style>
