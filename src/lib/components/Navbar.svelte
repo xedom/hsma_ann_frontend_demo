@@ -41,7 +41,11 @@
 			<a href="/logout">logout</a>
 			<a id="username" href={`/users/${user.username}`}>
 				<span>{user.username}</span>
-				<img src={user.picture} alt="User Profile" class="userpicture" />
+				<div class="userpicture">
+					{#if user.picture}
+						<img src={user.picture} alt="User Profile" />
+					{/if}
+				</div>
 			</a>
 		{/if}
 	</div>
@@ -101,6 +105,13 @@
 		width: 2.5rem;
 		height: 2.5rem;
 		border-radius: 50%;
+		overflow: hidden;
+		background-color: #222222;
+	}
+
+	.right .userpicture img {
+		width: 100%;
+		height: 100%;
 		object-fit: cover;
 	}
 

@@ -13,10 +13,9 @@ export const api_get = async (url: string) => {
 	});
 	const res = await response.json();
 
-	if (response.status == 401) 
-		throw new Error('Unauthorized');
-	else if (response.status != 200) 
-		throw new Error('Something went wrong');
+	if (response.status == 401) throw new Error('Unauthorized');
+	if (response.status == 403) throw new Error('Forbidden');
+	if (response.status != 200) throw new Error('Something went wrong');
 
 	return res;
 };
@@ -35,7 +34,13 @@ export const api_post = async (url: string, data: any) => {
 		},
 		body: JSON.stringify(data)
 	});
-	return response.json();
+	const res = await response.json();
+
+	if (response.status == 401) throw new Error('Unauthorized');
+	if (response.status == 403) throw new Error('Forbidden');
+	if (response.status != 200) throw new Error('Something went wrong');
+
+	return res;
 };
 
 export const api_put = async (url: string, data: any) => {
@@ -51,7 +56,13 @@ export const api_put = async (url: string, data: any) => {
 		},
 		body: JSON.stringify(data)
 	});
-	return response.json();
+	const res = await response.json();
+
+	if (response.status == 401) throw new Error('Unauthorized');
+	if (response.status == 403) throw new Error('Forbidden');
+	if (response.status != 200) throw new Error('Something went wrong');
+
+	return res;
 };
 
 export const api_delete = async (url: string) => {
@@ -66,5 +77,11 @@ export const api_delete = async (url: string) => {
 			// Authorization: `Bearer ${loggedUserToken}`
 		},
 	});
-	return response.json();
+	const res = await response.json();
+
+	if (response.status == 401) throw new Error('Unauthorized');
+	if (response.status == 403) throw new Error('Forbidden');
+	if (response.status != 200) throw new Error('Something went wrong');
+
+	return res;
 };

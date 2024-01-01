@@ -12,7 +12,13 @@
 	let picImage = '';
 	const formActionUrl = `${env.PUBLIC_API_URL}/users/settings`;
 	let userInfo:
-		| { _id: string; username: string; picture: string; email: string; address: string }
+		| {
+				_id: string;
+				username: string;
+				picture: string | undefined;
+				email: string;
+				// address: string;
+		  }
 		| undefined;
 
 	const handlePicError = (e: CustomEvent<{ error: string }>) => {
@@ -58,12 +64,13 @@
 		try {
 			const data = await apiGetLoggedUser();
 			console.log('data', data);
+			if (!data) return;
 			userInfo = {
-				_id: data._id,
+				_id: data.id,
 				username: data.username,
 				picture: data.picture,
-				email: data.email,
-				address: data.address
+				email: data.email
+				// address: ''
 			};
 		} catch (e) {
 			if (e instanceof Error) {
@@ -107,10 +114,10 @@
 			<input type="password" name="newPassword" id="newPassword" placeholder="new password" />
 		</div>
 
-		<div class="field">
+		<!-- <div class="field">
 			<label for="address">address</label>
 			<input type="text" name="address" id="address" placeholder={userInfo?.address ?? 'address'} />
-		</div>
+		</div> -->
 
 		<div class="buttons">
 			<button type="button" class="danger" on:click={handleDeleteAccount}>Delete Account</button>

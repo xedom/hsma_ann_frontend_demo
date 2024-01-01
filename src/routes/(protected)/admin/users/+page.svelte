@@ -23,6 +23,7 @@
 
 	const handleSetRole = async (role: UserRole) => {
 		try {
+			console.log('handleSetRole selectedUsers', selectedUsers);
 			await apiSetUsersRole(selectedUsers, role);
 			addToast({
 				description: 'Users role changed successfully',
@@ -71,9 +72,6 @@
 
 		for (let user of fetchedUsers) {
 			const { picture } = user;
-
-			user.id = user._id;
-			delete user._id;
 			user.picture = picture || '/images/rect.png';
 		}
 

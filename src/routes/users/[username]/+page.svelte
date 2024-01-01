@@ -20,8 +20,10 @@
 </script>
 
 <div class="container">
-	<div id="picture">
-		<img src={currentUser?.picture} alt="User" class="userpictureBig" />
+	<div class="picture">
+		{#if currentUser?.picture}
+			<img src={currentUser?.picture} alt="User Profile" />
+		{/if}
 	</div>
 	<div class="right">
 		<div class="username">
@@ -61,13 +63,20 @@
 		padding-left: 2px;
 	}
 
-	.userpictureBig {
+	.picture {
 		height: 300px;
 		width: 300px;
+		background-color: #222;
 		border-radius: 50%;
-		object-fit: cover;
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 		margin-top: 0.5rem;
+		overflow: hidden;
+	}
+
+	.picture img {
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
 	}
 
 	.right {

@@ -4,7 +4,11 @@
 </script>
 
 <a class="userchip" href="/users/{username}">
-	<img src={picture} alt="User" class="userpicture" />
+	<div class="userpicture">
+		{#if picture}
+			<img src={picture} alt="User" />
+		{/if}
+	</div>
 	<div class="username">{username}</div>
 </a>
 
@@ -19,9 +23,16 @@
 	}
 
 	.userpicture {
+		background: #222;
 		width: 30px;
 		height: 30px;
 		border-radius: 50%;
+		overflow: hidden;
+	}
+
+	.userpicture img {
+		width: 100%;
+		height: 100%;
 		object-fit: cover;
 	}
 
