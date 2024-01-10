@@ -13,11 +13,10 @@ export const api_get = async (url: string) => {
 	});
 	const res = await response.json();
 
+	if (response.status >= 200 && response.status < 300) return res;
 	if (response.status == 401) throw new Error('Unauthorized');
 	if (response.status == 403) throw new Error('Forbidden');
-	if (response.status != 200) throw new Error('Something went wrong');
-
-	return res;
+	throw new Error('Something went wrong');
 };
 
 export const api_post = async (url: string, data: any) => {
@@ -36,11 +35,10 @@ export const api_post = async (url: string, data: any) => {
 	});
 	const res = await response.json();
 
+	if (response.status >= 200 && response.status < 300) return res;
 	if (response.status == 401) throw new Error('Unauthorized');
 	if (response.status == 403) throw new Error('Forbidden');
-	if (response.status != 200) throw new Error('Something went wrong');
-
-	return res;
+	throw new Error('Something went wrong');
 };
 
 export const api_put = async (url: string, data: any) => {
@@ -58,11 +56,10 @@ export const api_put = async (url: string, data: any) => {
 	});
 	const res = await response.json();
 
+	if (response.status >= 200 && response.status < 300) return res;
 	if (response.status == 401) throw new Error('Unauthorized');
 	if (response.status == 403) throw new Error('Forbidden');
-	if (response.status != 200) throw new Error('Something went wrong');
-
-	return res;
+	throw new Error('Something went wrong');
 };
 
 export const api_delete = async (url: string) => {
@@ -79,9 +76,8 @@ export const api_delete = async (url: string) => {
 	});
 	const res = await response.json();
 
+	if (response.status >= 200 && response.status < 300) return res;
 	if (response.status == 401) throw new Error('Unauthorized');
 	if (response.status == 403) throw new Error('Forbidden');
-	if (response.status != 200) throw new Error('Something went wrong');
-
-	return res;
+	throw new Error('Something went wrong');
 };
